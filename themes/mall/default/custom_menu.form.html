@@ -1,0 +1,114 @@
+<script type="text/javascript">
+$(function(){
+    $('#category_form').validate({
+
+        errorLabelContainer: $('#warning'),
+        invalidHandler: function(form, validator) {
+               $('#warning').show();
+        },
+        onfocusout : false,
+        onkeyup    : false,
+        rules : {
+            cate_name : {
+                required : true
+              
+            },
+            sort_order : {
+                number   : true
+            }
+        },
+        messages : {
+            cate_name : {
+                required : '分类名称不能为空'
+
+            },
+            sort_order  : {
+                number   : '排序仅能为数字'
+            }
+        }
+    });
+});
+</script>
+
+<script>
+$(function(){
+	if($("input[type=radio][checked]").val()==0)
+	{
+		$('#key_value').html('KEY值:');
+		$('#zhuce').html('用字母或数字组成。');
+	}
+	else
+	{
+		
+		$('#key_value').html('url链接:');
+		$('#zhuce').html('请填写您的链接');
+	}
+})
+function get_value(key)
+{
+	if(key==0)
+	{
+		$('#key_value').html('KEY值:');
+		$('#zhuce').html('用字母或数字组成。');
+		
+	}else
+	{
+		$('#key_value').html('url链接:');
+		$('#zhuce').html('请填写您的链接');
+	}
+}
+</script>
+<ul class="tab">
+    <li class="active"><!--{if $smarty.get.act eq add}-->添加分类<!--{else}-->{$lang.edit}<!--{/if}--></li>
+</ul>
+<div class="eject_con">
+ <div class="adds">
+        <div id="warning"></div>
+        <form id="category_form" method="post" target="pop_warning" action="index.php?app=custom_menu&amp;act={$smarty.get.act}<!--{if $smarty.get.id}-->&amp;id={$smarty.get.id}<!--{/if}-->">
+        <ul>
+            <li>
+                <h3>分类名称:</h3>
+                <p><input class="text width_normal" type="text" name="cate_name" id="cate_name" value="{$gcategory.cate_name|escape}" /><label class="field_notice"></label></p>
+            </li>
+            <li>
+                <h3>分类上级:</h3>
+                <p><select name="parent_id" id="parent_id">
+                <option>{$lang.select_pls}</option>
+                {html_options options=$parents selected=$gcategory.parent_id}
+                </select></p>
+            </li>
+            <li>
+                <h3>类型:</h3>
+                <p>
+                 按钮: <input  onclick="get_value(0);"  <!-- {if $gcategory.type eq 0} --> checked <!-- {/if} --> type="radio" value="0" name="type"> URL类型:<input  onclick="get_value(1);" <!-- {if $gcategory.type eq 1} -->checked <!-- {/if} -->   value="1" type="radio" name="type" ><br>
+                 <b style="color:red;">如果选择URL类型：关键词不用填,key值直接填链接</b>
+                </p>
+            </li>
+            <li>
+                <h3 id='key_value'>KEY值:</h3>
+                <p><input type="text" name="keyvalue" value="{$gcategory.keyvalue}" style="width:176px;"  class="text "/><font style="color:red;" id='zhuce'>用字母或数字组成</font></p>
+            </li>
+           <li>
+                <h3>关键词:</h3>
+                <p><input type="text" name="keyword" value="{$gcategory.keyword}"  style="width:176px;"  class="text "/></p>
+            </li>
+            
+            
+            <li>
+                <h3>{$lang.sort_order}:</h3>
+                <p><input type="text" name="sort_order" value="{$gcategory.sort_order}"  class="text width_short"/></p>
+            </li>
+            <li>
+                <h3>显示:</h3>
+                <p><label>
+                 <input type="radio" name="if_show" value="1" {if $gcategory.if_show}checked="checked"{/if} />
+                {$lang.yes}</label>
+                <label>
+                <input type="radio" name="if_show" value="0" {if !$gcategory.if_show}checked="checked"{/if} />
+                {$lang.no}</label></p>
+            </li>
+        </ul>
+        <div class="submit"><input type="submit" class="btn" value="{$lang.submit}" /></div>
+        </form>
+    </div>
+</div>

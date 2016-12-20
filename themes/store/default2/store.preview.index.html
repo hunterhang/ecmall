@@ -1,0 +1,215 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" name="viewport">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+{$page_seo}
+<link type="text/css" rel="stylesheet" href="/themes/store/default2/styles/default/css/index.css">
+<link type="text/css" rel="stylesheet" href="/themes/store/default2/styles/default/css/flexslider.css">
+<script type="text/javascript" src="/themes/store/default2/styles/default/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="/themes/store/default2/styles/default/js/jquery.flexslider.js"></script>
+<script type="text/javascript" src="/themes/store/default2/styles/default/js/iscroll.js"></script>
+<script type="text/javascript" src="{lib file=ecmall.js}" charset="utf-8"></script>
+</head>
+
+<body>
+<script>
+$(window).load(function(){	
+	$('.flexslider').flexslider({
+    	animation: "slide"
+    });
+});
+</script>
+<div class="auto">
+  	<!------头部-------->
+	<div class="header">
+    	<a href="javascript:void(0);" class="logo"><img src="{$store.store_logo}" height="40"></a>   
+        <div class="nav">
+            <ul>
+                <li class="menu"><a href="javascript:;"><img src="/themes/store/default2/styles/default/images/nav_1.png"></a></li>
+                <li class="user"><a href="javascript:void(0);"><img src="/themes/store/default2/styles/default/images/nav_2.png"></a></li>
+                <li class="car"><a href="javascript:void(0);"><img src="/themes/store/default2/styles/default/images/nav_3.png"></a></li>
+            </ul>
+        </div>
+        
+        
+        <!----------下拉二级菜单开始--------------->
+        <div id="sub_menu_bg">
+            <div class="sub_menu" id="sub_menu" >
+                <div  id="scroller">
+                      <ul id="thelist">
+                          <li>
+                            <a href="javascript:void(0);">最新商品</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">推荐商品</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">热门商品</a>
+                        </li>
+                             <!--{foreach from=$store.store_gcates item=gcategory}-->
+                        <li>
+                            <a href="javascript:void(0);">{$gcategory.value|escape}</a>
+                        </li>
+                           <!--{/foreach}-->
+                      </ul>
+                      <div class="fun">
+                         <a href="javascript:;" class="code"><img src="/themes/store/default2/styles/default/images/code.png"/>店铺二维码</a>
+                         <a href="javascript:void(0);" class="fav"><img src="/themes/store/default2/styles/default/images/favorite.png"/>收藏本店</a>
+                      </div>
+                      <!----------二维码、店铺信息--------------->
+                      <div class="shop_info">
+                            <img src="<!--{if $store.store_code}-->{$store.store_code}<!--{else}-->/themes/store/default/styles/default/images/code.jpg<!--{/if}-->" class="shop_code"/>
+                            <p class="shop_name">店铺ID：{$store.store_name|escape}</p>
+                            <p class="shop_detail">
+                                <span>信用度：<strong>  <!--{if $store.credit_value ge 0}--><img src="{$store.credit_image}" alt="" /><!--{/if}--></strong></span><br />
+                                <span>商品数量：{$store.goods_count}</span>
+                            </p>
+                      </div>
+                  </div>
+                  <div class="arrow">>></div>
+                  <!--------显示收藏信息------------->
+                  <div class="fav_msg">
+                        <img src="/themes/store/default2/styles/default/images/favorite1.png" /><span id='collect'>收藏成功！</span>
+                  </div>
+            </div>
+        </div>
+        <script>
+			$(function(){
+				publicmain();
+			});	
+			
+			$(window).resize(function(){
+				publicmain();
+			});
+			
+			function publicmain(){
+				var h = document.documentElement.clientHeight;
+				$('#sub_menu_bg').css({'height':h});
+			}
+		</script>   
+        <!------滑动二级菜单js-------------->
+     
+        <!----------下拉二级菜单结束--------------->
+        
+         
+        <!--搜索条-->
+        <form class="searchBar">    
+          <form id="" name="" method="get" action="index.php">
+            <input type="hidden" name="app" value="store" />
+             <input type="hidden" name="act" value="search" />
+             <input type="hidden" name="id" value="{$store.store_id}" />
+                <input type="text" name="keyword" placeholder="搜搜看吧" class="search_text" /><input type="button" value="搜索" class="search_btn" />
+                 </form>
+        </form>
+        <!--搜索条end-->
+	</div>
+	
+	<script>
+
+
+	$(function(){
+	//导航
+	$(".menu").click(function(){
+		$(".sub_menu,#sub_menu_bg").css({'width':270});
+		$(".shade,.arrow").show();
+		})
+	$(".arrow").click(function(){
+		$(".sub_menu,#sub_menu_bg").css({'width':0});
+		$(".shade,.arrow").hide();
+		})
+	//显示（关闭）二维码等店铺信息
+	$(".code").click(function(){
+		$(".shop_info").slideToggle();
+		})
+	//加入收藏
+
+	})
+
+</script>
+	<!---轮播开始------>
+    <section class="slider">
+        <div class="flexslider">
+            <ul class="slides">
+                    <!--{foreach from=$goods_images item=goods_iamge}-->
+                <li>
+                     <img height="200px"  src="{$site_url}/{$goods_iamge.image_url}"/>
+                </li>
+                   <!--{/foreach}-->
+              
+            </ul>
+        </div>
+    </section>
+    <!-------轮播结束------------>
+    
+    <!-----主分类------->
+    <div class="main_sort">
+    	<ul>
+    	 <li> 
+    	  <a href="javascript:void(0);">
+                	<img src="<!--{if $store.store_new_images}-->{$store.store_new_images} <!--{else}-->/themes/store/default/styles/default/images/sort_icon1.png <!--{/if}--> " />
+            </a> 
+         </li>
+        	
+         <li>
+        	<a href="javascript:void(0);">
+          <img src="<!--{if $store.store_recommend_images}-->{$store.store_recommend_images} <!--{else}-->/themes/store/default/styles/default/images/sort_icon2.png <!--{/if}-->" />
+            </a></li>
+        	<li>
+        	<a href="javascript:void(0);">     	
+             	<img src="<!--{if $store.store_hot_images}-->{$store.store_hot_images} <!--{else}-->/themes/store/default/styles/default/images/sort_icon3.png <!--{/if}-->" />              
+            </a>
+            </li>
+               <!--{foreach from=$store.store_gcates_image item=gcategory}-->
+        		<li><a href="javascript:void(0);">
+            
+                	<img  src=" <!--{if $gcategory.cate_images}-->{$gcategory.cate_images}<!--{else}-->/themes/store/default/styles/default/images/sort_icon3.png<!--{/if}-->" />
+            </a> </li>
+               <!--{/foreach}-->
+
+        </ul>
+    </div>
+    <div class="border_line"></div>
+    
+    <!----栏目------------->
+     <!--{if $recommended_goods}-->
+    <div class="blocks">
+    	<h2>橱窗推荐</h2>
+    	<ul>	
+    	  <!--{foreach from=$recommended_goods item=rgoods}-->
+        	<li><a href="javascript:void(0);">
+        	<img src="{$rgoods.default_image}"></a>
+        	</li>
+        	<!-- {/foreach} -->
+        	
+        </ul>
+    </div>
+    <div class="border_line"></div>
+     <!--{/if}-->
+     
+       <!--{if $new_goods}-->
+    <div class="blocks">
+    	<h2>新品上市</h2>
+    	<ul>
+    	 <!--{foreach from=$new_goods item=ngoods}-->
+        	<li><a href="javascript:void(0);"><img src="{$ngoods.default_image}"></a></li>
+        <!--{/foreach}-->
+        </ul>
+    </div>
+      <!--{/if}-->
+</div>
+    <div class="footer">
+    	<p>
+        	<a href="javascript:void(0);">商铺首页</a>|
+            <a href="javascript:void(0);">会员中心</a>|
+            <a href="#">关于我们</a>
+        </p>
+        <p>Copyright &copy;2014 </p>
+    </div>
+   <div class="shade"></div>
+
+</body>
+</html>

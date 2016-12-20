@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="{$site_url}/" />
+<!-- Use IE7 mode -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7 charset={$charset}" />
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+{$page_seo}
+<meta name="author" content="" />
+<meta name="generator" content="" />
+<meta name="copyright" content="" />
+<link href="{res file=css/ecmall.css}" rel="stylesheet" type="text/css" />
+<link href="{res file=css/new/w_common.css}" rel="stylesheet" type="text/css" />
+<link href="{res file=css/new/new.css}" rel="stylesheet" type="text/css" />
+<link href="{res file=css/new/log-reg.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="index.php?act=jslang"></script>
+<script type="text/javascript" src="{res file=js/jquery-1.8.0.min.js}" charset="utf-8"></script>
+{$_head_tags}
+<script type="text/javascript">
+//注册表单验证
+$(function(){
+	 jQuery.validator.addMethod("checkusername", function(value, element) {
+    return this.optional(element) || /^[a-zA-Z0-9]+$/.test(value);
+    }, "只能包括英文字母和数字,不能有中文,特殊符号和空格");
+    $('#register_form').validate({
+        errorPlacement: function(error, element){
+            var error_td = element.parent('td').next('td');
+            error_td.find('.field_notice').hide();
+            error_td.append(error);
+        },
+        success       : function(label){
+            label.addClass('validate_right').text('OK!');
+        },
+        onkeyup: false,
+        rules : {
+            user_name : {
+                required : true,
+                 checkusername:true,
+                byteRange: [3,15,'{$charset}'],
+                remote   : {
+                    url :'index.php?app=member&act=check_user&ajax=1',
+                    type:'get',
+                    data:{
+                        user_name : function(){
+                            return $('#user_name').val();
+                        }
+                    },
+                    beforeSend:function(){
+                        var _checking = $('#checking_user');
+                        _checking.prev('.field_notice').hide();
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_user').hide();
+                    }
+                }
+            },
+            password : {
+                required : true,
+                minlength: 6
+            },
+            password_confirm : {
+                required : true,
+                equalTo  : '#password'
+            },
+            email : {
+                required : true,
+                email    : true
+            },
+            captcha : {
+                required : true,
+                remote   : {
+                    url : 'index.php?app=captcha&act=check_captcha',
+                    type: 'get',
+                    data:{
+                        captcha : function(){
+                            return $('#captcha1').val();
+                        }
+                    }
+                }
+            },
+            agree : {
+                required : true
+            }
+        },
+        messages : {
+            user_name : {
+                required : '{$lang.user_name_required}',
+                byteRange: '{$lang.user_name_limit}',
+                remote   : '{$lang.user_already_taken}'
+            },
+            password  : {
+                required : '{$lang.password_required}',
+                minlength: '{$lang.password_length_limit}'
+            },
+            password_confirm : {
+                required : '{$lang.password_confirm_please}',
+                equalTo  : '{$lang.password_inconsistent}'
+            },
+            email : {
+                required : '{$lang.email_required}',
+                email    : '{$lang.email_invalid}'
+            },
+            captcha : {
+                required : '{$lang.captcha_required}',
+                remote   : '{$lang.captcha_error}'
+            },
+            agree : {
+                required : '{$lang.agree_required}'
+            }
+        }
+    });
+});
+</script>
+</head>
+<body>
+
+{include file="new_headero.html"}
+	<!-----注册--------->
+    <div class="auto">
+    	<div class="reg_panel">
+            <form class="reg_box" id="register_form" method="post">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td colspan="3"><h2>填写注册信息</h2></td>
+                        </tr>
+                        <tr>
+                            <td><label>用户名：</label></td>
+                            <td><input onkeyup="value=value.replace(/[\s]/g,'')"   id="user_name" name="user_name"   type="text" class="text_box"></td>
+                              <td class="padding3 fontColor4"><label class="field_notice">{$lang.user_name_desc}&nbsp;(3~12个字符，可使用字母、数字)</label><label id="checking_user" class="checking">{$lang.checking}</label></td>
+                            
+                        </tr>
+                        <tr>
+                            <td><label>密&nbsp;&nbsp;&nbsp;码：</label></td>
+                            <td><input onkeyup="value=value.replace(/[\s]/g,'')"   type="password" id="password" name="password" class="text_box"></td>
+                             <td class="padding3 fontColor4"><label class="field_notice">{$lang.password_desc}</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>确认密码：</label></td>
+                            <td><input onkeyup="value=value.replace(/[\s]/g,'')"   type="password" name="password_confirm" class="text_box"></td>
+                               <td class="padding3 fontColor4"><label class="field_notice">{$lang.password_confirm_desc}</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>电子邮箱：</label></td>
+                            <td><input  name="email"  type="text" class="text_box"></td>
+                             <td class="padding3 fontColor4"><label class="field_notice">{$lang.email_desc}</label></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="checkbox"  name="agree" value="1" value="1" > <label for="clause">我已阅读并同意 <a class="agreement" target="_blank" href="{url app=article&act=system&code=eula}">用户服务协议</a></label></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td colspan="2"><input type="submit" name="Submit"  class="btn_box" value="立即注册"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+       		<a href="{url app=member&act=login&ret_url=$ret_url}" class="to_log"></a>
+        </div>
+    </div>
+    {include file="new_footero.html"}
+
+</body>
+</html>
+

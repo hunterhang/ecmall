@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>锦尚中国 微信商城</title>
+<link href="css/common.css" type="text/css" rel="stylesheet" />
+<link href="css/bookmark.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+<body class="gray">
+
+    <div class="fixed">
+        <!---头部------>
+        <div class="header header2">
+			<a href="javascript:history.back(-1);" class="back2_pre"></a>
+            我的收藏
+        </div>  
+    </div>
+	 <script type="text/javascript">
+	jQuery(function(jq){
+		function changeTab(lis, divs){
+			lis.each(function(i){
+				var els = jq(this);
+				els.click(function(){
+					lis.removeClass();
+					divs.stop().hide().animate({'opacity':0},0);
+					jq(this).addClass("cur");
+					divs.eq(i).show().animate({'opacity':1},300);
+				});
+			});
+		}
+		var rrE = jq(".mark");
+		changeTab(rrE.find(".bm_tab li"), rrE.find(".bm_con"));
+	
+	});
+	</script>
+    <div class="mark">
+        <ul class="bm_tab">
+            <li class="cur"><a href="#">收藏商品</a></li>
+            <li><a href="#">收藏店铺</a></li>
+        </ul>  
+        <!--------收藏商品--------->
+        <div class="bm_con">
+            <div class="marklist">
+                <ul>
+                    <li>
+                        <a href="#"><img src="images/goods1.jpg" /></a>
+                        <p>裂帛女装 2013新款夏装双层A字型宽松方领短袖…</p>
+                        <p>价格：<strong>￥149.00</strong></p>
+                        <p>收藏人气：256</p>
+                        <a href="javascript:;" class="close">X</a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="images/goods2.jpg" /></a>
+                        <p>裂帛正品 2013新款夏装 圆领花色连肩袖T恤女…</p>
+                        <p>价格：<strong>￥159.00</strong></p>
+                        <p>收藏人气：307</p>
+                        <a href="javascript:;" class="close">X</a>
+                    </li>	
+                    <li>
+                        <a href="#"><img src="images/goods3.jpg" /></a>
+                        <p>裂帛正品 2013新款夏装 圆领花色连肩袖T恤女…</p>
+                        <p>价格：<strong>￥209.00</strong></p>
+                        <p>收藏人气：453</p>
+                        <a href="javascript:;" class="close">X</a>
+                    </li>	
+                </ul>
+            </div>
+        </div>
+   		<!--------收藏店铺--------->
+        <div class="bm_con" style="display:none;">
+            <div class="marklist">
+                <ul>
+                    <li>
+                        <a href="#"><img src="images/shop1.jpg" /></a>
+                        <p>店名：裂帛旗舰店</p>
+                        <p>掌柜：裂帛服饰旗舰店</p>
+                        <p>收藏人气：2372</p>
+                        <a href="javascript:;" class="close">X</a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="images/shop2.jpg" /></a>
+                        <p>店名：lee官方旗舰店</p>
+                        <p>掌柜：lee官方旗舰店</p>
+                        <p>收藏人气：3648</p>
+                        <a href="javascript:;" class="close">X</a>
+                    </li>	
+                    <li>
+                        <a href="#"><img src="images/shop3.jpg" /></a>
+                        <p>店名：香影官方旗舰店</p>
+                        <p>掌柜：香影官方旗舰店</p>
+                        <p>收藏人气：698</p>
+                        <a href="javascript:;" class="close">X</a>
+                    </li>	
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!--------翻页-------------->
+    <div class="page">
+    	<a class="white_btn">上一页</a>
+        <a class="white_btn selected">
+        	1 / 2 ∨
+            <select>
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </a>
+        <a class="white_btn">下一页</a>
+    </div>
+    <!------底部-------->
+    <div class="footer">
+    	<p>
+        	<a href="index.html">商铺首页</a>|
+            <a href="user.html">会员中心</a>|
+            <a href="#">关于我们</a>
+        </p>
+        <p>Copyright &copy;2014 </p>
+    </div> 
+</body>
+</html>

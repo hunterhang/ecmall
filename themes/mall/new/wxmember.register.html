@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+{$page_seo}
+<link href="/themes/mall/default/styles/wxmall/css/common.css" rel="stylesheet" type="text/css" />
+<link href="/themes/mall/default/styles/wxmall/css/wxlog-reg.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="index.php?act=jslang"></script>
+<script type="text/javascript" src="/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=ecmall.js}" charset="utf-8"></script>
+{$_head_tags}
+</head>
+
+
+<script type="text/javascript">
+//注册表单验证
+$(function(){
+    $('#register_form').validate({
+        errorPlacement: function(error, element){
+            var error_td = element.parent('td');
+            error_td.find('.field_notice').hide();
+            error_td.append(error);
+        },
+        success       : function(label){
+            label.addClass('validate_right').text('OK!');
+        },
+        onkeyup: false,
+        rules : {
+            user_name : {
+                required : true,
+                byteRange: [3,15,'{$charset}'],
+                remote   : {
+                    url :'index.php?app=member&act=check_user&ajax=1',
+                    type:'get',
+                    data:{
+                        user_name : function(){
+                            return $('#user_name').val();
+                        }
+                    },
+                    beforeSend:function(){
+                        var _checking = $('#checking_user');
+                        _checking.prev('.field_notice').hide();
+                        _checking.next('label').hide();
+                        $(_checking).show();
+                    },
+                    complete :function(){
+                        $('#checking_user').hide();
+                    }
+                }
+            },
+            password : {
+                required : true,
+                minlength: 6
+            },
+            password_confirm : {
+                required : true,
+                equalTo  : '#password'
+            },
+
+            captcha : {
+                required : true,
+                remote   : {
+                    url : 'index.php?app=captcha&act=check_captcha',
+                    type: 'get',
+                    data:{
+                        captcha : function(){
+                            return $('#captcha1').val();
+                        }
+                    }
+                }
+            },
+            agree : {
+                required : true
+            }
+        },
+        messages : {
+            user_name : {
+                required : '{$lang.user_name_required}',
+                byteRange: '{$lang.user_name_limit}',
+                remote   : '{$lang.user_already_taken}'
+            },
+            password  : {
+                required : '{$lang.password_required}',
+                minlength: '{$lang.password_length_limit}'
+            },
+            password_confirm : {
+                required : '{$lang.password_confirm_please}',
+                equalTo  : '{$lang.password_inconsistent}'
+            },
+            captcha : {
+                required : '{$lang.captcha_required}',
+                remote   : '{$lang.captcha_error}'
+            },
+            agree : {
+                required : '{$lang.agree_required}'
+            }
+        }
+    });
+});
+</script>
+
+<body id="log-reg" class="gray">
+    <div class="fixed">
+        <div class="header header2">
+			<a href="javascript:history.back(-1);" class="back2_pre"></a>
+          用户注册
+        </div>  
+    </div>
+    
+    <!-----登录--------->
+    <div class="login_panel" >
+        <form class="login_box" id="register_form" method="post">
+            <h2>填写注册信息</h2>
+            <table  width="100%">
+            <tr>
+              <td> <input placeholder="用户名" type="text" name="user_name" class="text">
+               <label class="field_notice"></label></td>
+            </tr>
+             <tr>  
+               <td> <input placeholder="密 码"  id="password" name="password" type="password"  class="text">  
+                 <label class="field_notice"></label></td>
+            </tr>
+            <tr> 
+               <td>  
+                <input placeholder="确认密码"   name="password_confirm" type="password"  class="text">  
+               <label class="field_notice"></label></td>
+            </tr>
+        
+           <tr>
+           <td>
+            <input  value="立即注册"  type="submit" class=" red_btn sub_btn">
+            </td>
+            </tr>
+            </table>
+            <p>已有账号？<a href="{url app=member&act=wx_login&ret_url=$ret_url}" >直接登录</a></p>
+            <input type="hidden"  checked name="agree" value="1" value="1" > 
+        </form>
+    </div>
+    
+    
+  
+</body>
+</html>

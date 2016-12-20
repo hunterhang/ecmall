@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+/* 登录 */
+.login_panel{ background:url(../images/login_banner.jpg) no-repeat; height:430px; position:relative;}
+.login_box{ float:right; margin:40px 0 0 0; border:#ccc solid 1px; width:250px; height:300px; padding:30px; background:#fff;}
+.login_box h2,.reg_box h2{ font-size:20px; font-weight:normal; margin-bottom:10px;}
+.login_box td{ padding:5px 0; vertical-align:top;}
+.login_box label{ font-size:14px; display:block; margin-top:5px;}
+.login_box .text_box,.reg_box .text_box{ padding:8px; border:#ccc solid 1px;   border-radius: 2px; width:170px; background:#fff;}
+.login_box .btn_box,.reg_box .btn_box{ background:#014f97; border:#0920A6 solid 1px; cursor:pointer; color: #FFF;display: block;font: 18px/42px 微软雅黑; height: 42px;overflow: hidden; padding-bottom: 2px;text-align: center;text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);width: 188px;}
+.login_box .l_link {color: #005094;padding:8px 5px; font-size:14px; display:inline-block;}
+.login_box .l_link:hover{ text-decoration:underline;}
+.login_panel .tiyan{ position:absolute; top:175px; left:55px; width:170px; height:50px; display:block;}
+/* 注册 */
+.reg_panel{ background:url(../images/reg_banner.jpg) no-repeat right bottom; height:430px; position:relative;}
+.reg_box{ padding:50px 0 0 50px;}
+.reg_box label{ font-size:14px;}
+.reg_box .reg_notice{ color:#999;}	
+.reg_box td{ padding:5px 0;}
+.reg_box .text_box{ margin-right:5px;}
+.reg_box .btn_box{ background:#1eb21f; border:#0E7610;}
+.reg_box .agreement{ color:#014f97; text-decoration:underline;}
+.reg_panel .to_log{ position:absolute;width:170px; height:50px; display:block; right:85px; top:130px;}

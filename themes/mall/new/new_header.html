@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="{$site_url}/" />
+<!-- Use IE7 mode -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7 charset={$charset}" />
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+{$page_seo}
+
+<meta name="author" content="" />
+<meta name="generator" content="" />
+<meta name="copyright" content="" />
+<link href="{res file=css/ecmall.css}" rel="stylesheet" type="text/css" />
+<link href="{res file=css/w_common.css}" rel="stylesheet" type="text/css" />
+<link href="{res file=css/log-reg.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="index.php?act=jslang"></script>
+<script type="text/javascript" src="/js/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="{lib file=ecmall.js}" charset="utf-8"></script>
+<script type="text/javascript" src="{res file=js/nav.js}" charset="utf-8"></script>
+
+<script type="text/javascript" src="{res file=js/jquery-1.8.0.min.js}" charset="utf-8"></script>
+<script>
+$(function(){
+	$(".sao").hover(function(){
+		$(".code").toggle();
+		})
+	})
+$(function(){
+	$(".menu_li").hover(function(){
+		$(this).find(".sub_menu").toggle();
+		$(this).find(".menu_list").toggleClass("cur");
+		})
+	})
+</script>
+{$_head_tags}
+</head>
+<body>
+<div class="auto">
+    <div class="header auto">
+    	<div class="top_bar">
+            <a href="javascript:;" class="sao">微信扫一扫<img src="{res file='images/s.jpg'}" /></a> <em>|</em> 进群了解更多：<strong style="color:#f00">241294074</strong>
+            <div class="code" style="display:none"><img src="{res file='images/code.png'}" /></div>
+        </div>
+        <div onclick="window.location.href='/';" class="logo" style="cursor:pointer;"><img src="{res file='images/logo.jpg'}" /></div>
+        <div class="headerLinks">
+            <a href="#" target="_blank"><img src="{res file='images/weibo.png'}" />关注我们</a>
+                <!--{if !$visitor.user_id}-->
+            <a href="{url app=member&act=login&ret_url=$ret_url}">{$lang.login}</a>
+            <a href="{url app=member&act=register&ret_url=$ret_url}">{$lang.register}</a>
+            <!--{else}-->
+           {$visitor.user_name|escape} <a href="{url app=member&act=logout}">{$lang.logout}</a>
+            <a  href="{url app=member}">{$lang.member_center}</a>
+            <!--{/if}-->
+        </div>
+    </div>
+    
+    <div class="auto">
+        <ul class="nav">
+            <li class="menu_li">
+                <a href="#" class="menu_list">微信商城服务</a>
+                <ol class="sub_menu">
+                    <li class="menu_item"><a href="{url app=member&act=register&ret_url=$ret_url}">我要开店</a></li>
+                    <li class="menu_item"><a href="http://weixin.qq.com" target="_blank">关于微信商城</a></li>
+                </ol>
+            </li>
+            <li class="menu_li">
+                <a href="#" class="menu_list">微信商城成功之旅</a>
+                <ol class="sub_menu">
+                    <li class="menu_item"><a href="#">商城上线指南</a></li>
+                    <li class="menu_item"><a href="#">成功卖家故事</a></li>
+                </ol>
+            </li>
+            <li class="menu_li">
+                <a href="#" class="menu_list">开通要求</a>
+                <ol class="sub_menu">
+                    <li class="menu_item"><a href="#">开通要求</a></li>
+                </ol>
+            </li>
+            <li class="menu_li">
+                <a href="#" class="menu_list">帮助中心</a>
+                <ol class="sub_menu">
+                    <li class="menu_item"><a href="#">联系我们</a></li>
+                    <li class="menu_item"><a href="#">常见问题</a></li>
+                </ol>
+            </li>
+        </ul>
+    </div>

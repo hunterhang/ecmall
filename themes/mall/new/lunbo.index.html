@@ -1,0 +1,309 @@
+<!--ypy-->
+{include file=member.header.html}
+{$images_upload}
+
+<style>
+.box_arr .table_btn { width: 222px; }
+.box_arr .table_btn a { float: left; }
+.box_arr .table_btn a.disable_spec { background: url({res file=images/member/btn.gif}) repeat 0 -1018px; float: right; }
+.dialog_body{ border:0px; }
+.add_spec .add_link { color:#919191; }
+.add_spec .add_link:hover { color:red; }
+add_spec h2 { padding-left: 10px; }
+.width7{ width: 250px;}
+.f_l{ float:left; }
+.mls_id { width: 0; filter: alpha(opacity=0);opacity: 0; }
+</style>
+<script type="text/javascript">
+//<!CDATA[
+var SPEC = {$goods.spec_json};
+
+
+function add_uploadedfile(file_data)
+{
+		
+    if(file_data.instance == 'goods_image'){
+        $('#goods_images').append('<li ectype="handle_pic" file_id="'+ file_data.file_id +'" thumbnail="{$site_url}/'+ file_data.thumbnail +'"><input type="hidden" value="'+ file_data.file_id +'" name="goods_file_id[]"/><div class="pic"><img src="{$site_url}/'+ file_data.thumbnail +'" width="55" height="55" alt="" /><div ectype="handler" class="bg"><p class="operation"><span class="cut_in" ectype="set_cover" ecm_title="{$lang.set_cover}"></span><span class="delete" ectype="drop_lunbo_image" ecm_title="{$lang.drop}"></span></p></div></div></li>');
+                trigger_uploader();
+        if($('#big_goods_image').attr('src') == '{$goods.default_goods_image}'){
+            set_cover(file_data.file_id);
+        }
+        if(GOODS_SWFU.getStats().files_queued == 0){
+            window.setTimeout(function(){
+                $('#uploader').hide();
+                $('#open_uploader').find('.show').attr('class','hide');
+            },4000);
+        }
+      
+       
+        var html="<li id='li"+ file_data.file_id +"'>";
+         html+="<h2 style='width:70px;'>广告图链接: </h2>";
+         html+=" <div style='width:360px;'  class='arrange'>";
+          html+="<input  style='width:268px;'  type='text' name='lunbo_link["+ file_data.file_id +"]' class='text width_normal' /> <a target='_blank' href='{url app=my_category&act=link}'>点击获取链接</a></div>";
+         
+          html+="</li>";
+          $("#lunbo_link").append(html);
+           if($('#tijiao').val()!='提交')
+        {
+        	$("#lunbo_link_button").append('<input id="tijiao"  type="submit" class="add_btn" value="提交" >');
+        }
+  
+    }else if(file_data.instance == 'desc_image'){
+    	
+        $('#desc_images').append('<li file_name="'+ file_data.file_name +'" file_path="'+ file_data.file_path +'" ectype="handle_pic" file_id="'+ file_data.file_id +'"><input type="hidden" name="desc_file_id[]" value="'+ file_data.file_id +'"><div class="pic" style="z-index: 2;"><img src="{$site_url}/'+ file_data.file_path +'" width="50" height="50" alt="'+ file_data.file_name +'" /></div><div ectype="handler" class="bg" style="z-index: 3;display:none"><img src="{$site_url}/'+ file_data.file_path +'" width="50" height="50" alt="'+ file_data.file_name +'" /><p class="operation"><a href="javascript:void(0);" class="cut_in" ectype="insert_editor" ecm_title="{$lang.insert_editor}"></a><span class="delete" ectype="drop_lunbo_image" ecm_title="{$lang.drop}"></span></p><p class="name">'+ file_data.file_name +'</p></div></li>');
+                trigger_uploader();
+        if(EDITOR_SWFU.getStats().files_queued == 0){
+            window.setTimeout(function(){
+                $('#editor_uploader').hide();
+            },5000);
+        }
+    }
+}
+
+
+function set_cover(file_id){
+    if(typeof(file_id) == 'undefined'){
+        $('#big_goods_image').attr('src','{$goods.default_goods_image}');
+        return;
+    }
+    var obj = $('*[file_id="'+ file_id +'"]');
+    $('*[file_id="'+ file_id +'"]').clone(true).prependTo('#goods_images');
+    $('*[ectype="handler"]').hide();
+    $('#big_goods_image').attr('src',obj.attr('thumbnail'));
+    obj.remove();
+}
+
+$(function(){
+     $('#goods_form').validate({
+        errorPlacement: function(error, element){
+            $(element).next('.field_notice').hide();
+            $(element).after(error);
+        },
+        success       : function(label){
+            label.addClass('validate_right').text('OK!');
+        },
+        onkeyup : false,
+        rules : {
+            goods_name : {
+                required   : true
+            },
+            price      : {
+                number     : true,
+                required : true,
+                min : 0
+            },
+            stock      : {
+                digits    : true
+            },
+            cate_id    : {
+                remote   : {
+                    url  : 'index.php?app=my_goods&act=check_mgcate',
+                    type : 'get',
+                    data : {
+                        cate_id : function(){
+                            return $('#cate_id').val();
+                        }
+                    }
+                }
+            }
+        },
+        messages : {
+            goods_name  : {
+                required   : '{$lang.goods_name_empty}'
+            },
+            price       : {
+                number     : '{$lang.number_only}',
+                required : '{$lang.price_empty}',
+                min : '{$lang.price_ge_0}'
+            },
+            stock       : {
+                digits  : '{$lang.number_only}'
+            },
+            cate_id     : {
+                remote  : '{$lang.select_leaf_category}'
+            }
+        }
+    });
+    // init cover
+    set_cover($("#goods_images li:first-child").attr('file_id'));
+
+    // init spec
+    spec_update();
+});
+//]]>
+</script>
+<div class="content">
+  <div class="totline"></div>
+  <div class="botline"></div>
+  {include file=member.menu.html}
+  <div id="right">
+        <div class="wrap">
+            <div class="public" style="height:700px;">
+               <!-- <form method="post" id="goods_form">-->
+                    <div class="information_index">
+                        <div class="add_wrap" style="display:none;">
+                            <div class="assort">
+                                <p class="txt">{$lang.mgcategory}: </p>
+                                <p class="select" id="gcategory">
+                                    <!-- {if $goods.cate_id} -->
+                                    <span class="f_l">{$goods.cate_name|escape}</span>
+                                    <a class="edit_gcategory btn" href="javascript:;">{$lang.edit}</a>
+                                    <select style="display:none">
+                                        <option>{$lang.select_pls}</option>
+                                        {html_options options=$mgcategories}
+                                    </select>
+                                    <!-- {else} -->
+                                    <select>
+                                        <option>{$lang.select_pls}</option>
+                                        {html_options options=$mgcategories}
+                                    </select>
+                                    <!-- {/if} -->
+                                    <input type="text" id="cate_id" name="cate_id" value="{$goods.cate_id}" class="mls_id" />
+                                    <input type="hidden" name="cate_name" value="{$goods.cate_name|escape}" class="mls_names" />
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <h4>{$lang.goods_base_info}&nbsp;&nbsp;&nbsp;(<font style="color:red;">图片大小推荐640*400，2--4张效果最佳。</font>)</h4>
+                        <div class="add_wrap">
+
+                            <div class="pic_list">
+                                <div class="big_pic"><img id="big_goods_image" src="{$goods.default_goods_image}" width="300" height="300" alt="" /></div>
+                                <div class="small_pic">
+                                    <ul id="goods_images">
+                                        <!--{foreach from=$goods_images item=goods_iamge}-->
+                                        <li ectype="handle_pic" file_id="{$goods_iamge.file_id}" thumbnail="{$site_url}/{$goods_iamge.thumbnail}">
+                                        <input type="hidden" name="goods_file_id[]" value="{$goods_iamge.file_id}">
+                                        <div class="pic">
+                                            <img src="{$site_url}/{$goods_iamge.thumbnail}" width="55" height="55" />
+                                            <div ectype="handler" class="bg">
+                                                    <p class="operation">
+                                                        <span class="cut_in" ectype="set_cover" ecm_title="{$lang.set_cover}"></span>
+                                                        <span class="delete" ectype="drop_lunbo_image" ecm_title="{$lang.drop}"></span>
+                                                    </p>
+                                            </div>
+                                        </div>
+                                        </li>
+                                        <!--{/foreach}-->
+                                    </ul>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="upload_btn">
+                                    <div class="upload" id="open_uploader"><b class="hide">{$lang.upload_goods_image}</b></div>
+                                    <div class="upload_con" id="uploader" style="display:none">
+                                        <div class="upload_con_top"></div>
+                                        <div class="upload_wrap">
+
+                                            <ul>
+                                                <li class="btn1">
+                                                <div id="divSwfuploadContainer">
+                                                    <div id="divButtonContainer">
+                                                        <span id="spanButtonPlaceholder"></span>
+                                                    </div>
+                                                </div>
+                                                </li>
+                                                <li><iframe src="index.php?app=comupload&act=view_iframe&id={$id}&belong={$belong}&instance=goods_image" width="86" height="30" scrolling="no" frameborder="0"></iframe></li>
+                                                <li id="open_remote" class="btn2">{$lang.rem_upload}</li>
+                                            </ul>
+                                            <div id="remote" class="upload_file" style="display:none">
+                                            <iframe src="index.php?app=comupload&act=view_remote&id={$id}&belong={$belong}&instance=goods_image" width="272" height="39" scrolling="no" frameborder="0"></iframe>
+                                            </div>
+                                            <div id="goods_upload_progress"></div>
+                                            <div class="upload_txt">
+                                                <span>{$lang.lunbo_for_upload}</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="upload_con_bottom"></div>
+                                    </div>
+                                </div>
+                            </div>
+                     
+                           <!--<div class="products">
+                           <form method="POST" action="index.php?app=lunbo">
+                                <ul id='lunbo_link'>  
+                                 <!--{if $goods_images}--> 
+                               <?php $count=1; ?>
+                                <!--{foreach from=$goods_images item=goods_iamge key=key}-->
+                                    <li  id="li{$goods_iamge.file_id}">
+                                        <h2 style="width:70px;">广告图链接<?php echo $count; $count+=1; ?>: </h2>
+                                        <div style="width:360px;"  class="arrange">
+                                        <input  style="width:268px;"  type="text" name="lunbo_link[{$goods_iamge.file_id}]" value="{$goods_iamge.image_link}" class="text width_normal" />
+                                      <a target="_blank" href="{url app=my_category&act=link}">点击获取链接</a>
+                                          </div>
+                                    </li>
+                                <!--{/foreach}-->
+                                
+                                   <!--{/if}-->
+                                  </ul>
+                                 
+                           
+                                <!--{if !$goods_images}--> 
+                                <div id="lunbo_link_button"></div>
+                                <!--{else}-->
+                                  <div id="lunbo_link_button"><input id="tijiao"  type="submit" class="add_btn" value="提交" ></div>
+                                  <!--{/if}-->
+                                   </form> 
+                            </div>-->
+                            <div class="clear"></div>
+                        </div>
+                    
+                              <div class="add_bewrite" style="display:none;">
+                            <h5>{$lang.description}</h5>
+                            <div class="add_wrap">
+                                <div class="editor">
+                                    <div>
+                                    <textarea name="description" id="description"  style="width:100%; height:400px;">
+                                    {$goods.description|escape}
+                                    </textarea>
+                                    </div>
+                                    <div style=" position: relative; top: 10px; z-index: 5;"><a class="btn3" id="open_editor_uploader">{$lang.uploadedfile}</a>
+                                        <div class="upload_con" id="editor_uploader" style="display:none">
+                                            <div class="upload_con_top"></div>
+                                            <div class="upload_wrap">
+
+                                                <ul>
+                                                    <li>
+                                                        <div id="divSwfuploadContainer">
+                                                            <div id="divButtonContainer">
+                                                                <span id="editor_upload_button"></span>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li><iframe src="index.php?app=comupload&act=view_iframe&id={$id}&belong={$belong}&instance=desc_image" width="86" height="30" scrolling="no" frameborder="0"></iframe></li>
+                                                    <li id="open_editor_remote" class="btn2">{$lang.rem_upload}</li>
+                                                </ul>
+                                                <div id="editor_remote" class="upload_file" style="display:none">
+                                                <iframe src="index.php?app=comupload&act=view_remote&id={$id}&belong={$belong}&instance=desc_image" width="272" height="39" scrolling="no" frameborder="0"></iframe>
+                                                </div>
+                                                <div id="editor_upload_progress"></div>
+                                                <div class="upload_txt">
+                                                    <span>{$lang.lunbo_for_upload}</span>
+                                                </div>
+
+                                            </div>
+                                            <div class="upload_con_bottom"></div>
+                                        </div>
+                                    </div>
+                               
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="issuance"><input type="submit" class="btn" value="{$lang.submit}" /></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+              <!--  </form>-->
+            </div>
+            <div class="wrap_bottom"></div>
+        </div>
+
+        <div class="clear"></div>
+        <div class="adorn_right1"></div>
+        <div class="adorn_right2"></div>
+        <div class="adorn_right3"></div>
+        <div class="adorn_right4"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+{include file=footer.html}

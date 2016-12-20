@@ -1,0 +1,29 @@
+.auto{ margin:0 auto; width:1100px;}
+
+.header_bg{ background:#222;}
+
+
+.header{ position:relative;  height:60px; z-index:999;color:#fff;}
+.header .logo{ position:absolute; top:17px; left:0;}
+.header .logo img{ height:65px;}
+.header .headerLinks{ position:absolute; right:5px; top:20px;}
+.header .headerLinks a{ display:inline-block; height:30px; margin-left:10px; font-size:12px; color:#333; vertical-align:middle;}
+.header .headerLinks a:hover{ color:#93D034;}
+.header .headerLinks a img{ vertical-align:text-bottom;}
+
+
+.nav{ height:42px;}
+.nav .nav_l{ background:url(../../images/new/navs.png) no-repeat 0 0; width:37px; height:42px; display:block; float:left;}
+.nav .nav_m{ float:left;background:url(../../images/new/navsm.png) repeat-x; height:42px;}
+.nav .navbox{ float:right;}
+.nav .nav_r{background:url(../../images/new/navs.png) repeat-x 10px 0; height:42px; width:10px; display:block; float:left;}
+
+
+/* 底部 */
+.footer{text-align:center; font-size:12px;  overflow:hidden; clear:both; margin-top:10px; clear:both; background:#333;}
+.footer .auto{padding:15px 0; margin:0 auto; width:1200px; color:#666;}
+.footer a{color:#999; margin:0 2px;}
+.footer a:hover{text-decoration:underline;}
+.footer p{ color:#999;}
+
+

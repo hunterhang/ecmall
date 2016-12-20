@@ -1,0 +1,75 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>用户提现</p>
+  <ul class="subnav">
+    <li><span>{$lang.manage}</span></li>
+   <!-- <li><a class="btn1" href="index.php?app=user&amp;act=add">{$lang.add}</a></li>-->
+  </ul>
+</div>
+
+<div class="mrightTop">
+  <div class="fontl">
+    <form method="get">
+       <div class="left">
+          <input type="hidden" name="app" value="jifen" />
+          <input type="hidden" name="act" value="index" />
+        会员名:
+          <input class="queryInput" type="text" name="user_name" value="{$smarty.get.user_name|escape}" />
+          <input type="submit" class="formbtn" value="{$lang.query}" />
+      </div>
+      <!--{if $filtered}-->
+      <a class="left formbtn1" href="index.php?app=indent">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+  </div>
+  <div class="fontr">{include file=page.top.html}</div>
+</div>
+<div class="tdare">
+  <table width="100%" cellspacing="0" class="dataTable">
+    <!--{if $indents}-->
+    <tr class="tatr1">
+      <td width="20" class="firstCell"><!--<input type="checkbox" class="checkall" />--></td>
+      <td>用户ID</td>
+      <td>用户名称</td>
+      <td>积分</td>
+      <td>推荐的好友</td>
+      <td>好友充值记录</span></td>
+      <td class="handler">{$lang.handler}</td>
+    </tr>
+    <!--{/if}-->
+    <!--{foreach from=$indents item=indent}-->
+    <tr class="tatr2">
+      <td class="firstCell"><!--<input type="checkbox" class="checkitem" value="{$indent.id}" />--></td>
+      <td>{$indent.user_id}</td>
+      <td>{$indent.user_name}</td>
+      <td>{$indent.jifen}</td>
+      <td><a href="index.php?app=indent&amp;act=friend_info&amp;user_id={$indent.user_id}">好友详细</a></td>
+      <td><a href="index.php?app=indent&amp;act=alipay_info&amp;user_id={$indent.user_id}">充值记录</a></td>
+      <td class="handler">
+      <span style="width: 100px">
+          <!-- {if $indent.jifen gt 0} -->
+         <a href="index.php?app=indent&amp;act=get_jifen&amp;user_id={$indent.user_id}">提现</a>
+       <!-- {elseif $indent.status eq 0} -->
+       提现
+       <!-- {/if} -->
+
+      </span>
+      </td>
+    </tr>
+    <!--{foreachelse}-->
+    <tr class="no_data">
+      <td colspan="10">{$lang.no_data}</td>
+    </tr>
+    <!--{/foreach}-->
+  </table>
+  <!--{if $indents}-->
+  <div id="dataFuncs">
+    <div id="batchAction" class="left paddingT15"> &nbsp;&nbsp;
+    
+    </div>
+    <div class="pageLinks">{include file=page.bottom.html}</div>
+    <div class="clear"></div>
+  </div>
+  <!--{/if}-->
+</div>
+{include file="footer.html"}

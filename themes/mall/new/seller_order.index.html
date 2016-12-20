@@ -1,0 +1,188 @@
+{include file=member.header.html}
+<script type="text/javascript">
+$(function(){
+    $('#add_time_from').datepicker({dateFormat: 'yy-mm-dd'});
+    $('#add_time_to').datepicker({dateFormat: 'yy-mm-dd'});
+    $('.checkall_s').click(function(){
+        var if_check = $(this).attr('checked');
+        $('.checkitem').each(function(){
+            if(!this.disabled)
+            {
+                $(this).attr('checked', if_check);
+            }
+        });
+        $('.checkall_s').attr('checked', if_check);
+    });
+    $('a[ectype="batchcancel"]').click(function(){
+        if($('.checkitem:checked').length == 0){
+            return false;
+        }
+        if($(this).attr('presubmit')){
+            if(!eval($(this).attr('presubmit'))){
+                return false;
+            }
+        }
+        var items = '';
+        $('.checkitem:checked').each(function(){
+            items += this.value + ',';
+        });
+        items = items.substr(0, (items.length - 1));
+        
+        var uri = $(this).attr('uri');
+        uri = uri + '&' + $(this).attr('name') + '=' + items;
+        var id = 'seller_order_cancel_order';
+        var title = $(this).attr('dialog_title') ? $(this).attr('dialog_title') : '';
+        //var url = $(this).attr('uri');
+        var width = '500';
+        ajax_form(id, title, uri, width);
+    });
+    
+    $('a[ectype="importorder"]').click(function(){
+        if($('.checkitem:checked').length == 0){
+        	alert('请选择要导出的订单');
+            return false;
+        }
+        if($(this).attr('presubmit')){
+            if(!eval($(this).attr('presubmit'))){
+                return false;
+            }
+        }
+        var items = '';
+        $('.checkitem:checked').each(function(){
+            items += this.value + ',';
+        });
+        items = items.substr(0, (items.length - 1));
+        window.location.href='index.php?app=seller_order&act=import_order&items='+items;
+    
+    
+    });
+    
+    
+    
+    
+});
+</script>
+<style>
+.table table{border-collapse: collapse;
+    word-wrap: break-word;table-layout:fixed;}
+</style>
+<div class="content" >
+    {include file=member.menu.html}
+    <div id="right" >{include file=member.submenu.html}
+        <div class="wrap" >
+            <div class="scarch_order">
+                <form method="get">
+                <div style="float:left;">
+                <span class="title">{$lang.order_sn}:</span>
+                <input class="text_normal" type="text" name="order_sn" value="{$query.order_sn|escape}" />
+                <span class="title">{$lang.add_time}:</span>
+                <input class="text_normal width2" type="text" name="add_time_from" id="add_time_from" value="{$query.add_time_from}" /> &#8211; <input class="text_normal width2" id="add_time_to" type="text" name="add_time_to" value="{$query.add_time_to}" />
+                <span class="title">{$lang.buyer_name}:</span>
+                <input class="text_normal" type="text" name="buyer_name" value="{$query.buyer_name|escape}" />
+                
+                 <br> <span class="title">收货人姓名:</span>
+                 <input class="text_normal" type="text" name="consignee" value="{$query.consignee|escape}" />
+                 <!--<span class="title">支付方式:</span>
+                  <select class="querySelect" name="payment_name">{html_options options=$payment_name_options selected=$smarty.get.payment_name}
+                  &nbsp;  
+                  <input <!--{if $query.flag eq '0'}-->checked<!--{/if}--> type="radio" name="flag" value="0"><img src="themes/mall/new/styles/default/images/op_memo_0.png">
+                  <input <!--{if $query.flag eq '1'}-->checked<!--{/if}-->  type="radio"  name="flag" value="1"><img src="themes/mall/new/styles/default/images/op_memo_1.png">
+                  <input <!--{if $query.flag eq '2'}-->checked<!--{/if}-->  type="radio"  name="flag" value="2"><img src="themes/mall/new/styles/default/images/op_memo_2.png">
+                  <input <!--{if $query.flag eq '3'}-->checked<!--{/if}-->  type="radio"  name="flag" value="3"><img src="themes/mall/new/styles/default/images/op_memo_3.png">
+                  <input <!--{if $query.flag eq '4'}-->checked<!--{/if}-->  type="radio"  name="flag" value="4"><img src="themes/mall/new/styles/default/images/op_memo_4.png">
+                  <input <!--{if $query.flag eq '5'}-->checked<!--{/if}-->  type="radio"  name="flag" value="5"><img src="themes/mall/new/styles/default/images/op_memo_5.png">-->
+                <input type="hidden" name="app" value="seller_order" />
+                <input type="hidden" name="act" value="index" />
+                <input type="hidden" name="type" value="{$type}" />
+                <input type="submit" class="btn" value="{$lang.search}" />
+                </div>
+                <!--{if $filtered}-->
+                    <a class="detlink" href="{url app=seller_order&type=$query.type}">{$lang.cancel_query}</a>
+                <!--{/if}-->
+
+        </form>
+
+        </div>
+         <div class="public_index table">
+                <table>
+                    <tr <!--{if $orders}--> class="table_line"<!--{/if}-->>
+                    <th class="width1"><input id="all" type="checkbox" class="checkall_s" /></th>
+                    <th class="align1" colspan="8">
+                            <label for="all"><span class="all">{$lang.checkall}</span></label>
+                            <a href="javascript:;" class="delete" ectype="batchcancel" uri="index.php?app=seller_order&act=cancel_order" name="order_id">{$lang.cancel_order}</a>
+                           &nbsp;&nbsp; <a href="javascript:;" ectype="importorder" class="import" >导出选中订单</a>&nbsp;&nbsp; <a href="{url app=seller_order&act=import_all_order}"  class="import" >导出全部订单</a>
+                        </th>
+                    </tr>
+                    <!--{if $orders}-->
+                    <tr class="line tr_bgcolor">
+                        <th></th>
+                        <th>{$lang.order_sn}</th>
+                        <th>{$lang.buyer_name}</th>
+                        <th width="61">{$lang.consignee}</th>
+                        <th>{$lang.phone_tel}</th>
+                        <th>{$lang.payment_name}</th>
+                        <th>{$lang.order_amount}</th>
+                        <th>订单时间</th>
+                        <th width="90">{$lang.order_status}</th>
+                    </tr>
+                    <!--{/if}-->
+                    <!-- 循环开始 -->
+                    <!--{foreach from=$orders item=order}-->
+                    <tr class="color2">
+                        <td class="align2"><input type="checkbox" value="{$order.order_id}" class="checkitem" <!--{if $order.status eq ORDER_FINISHED || $order.status eq ORDER_CANCELED}--> disabled="disabled" <!--{/if}-->/></td>
+                        <td class="orders"><span class="color3">{$order.order_sn}{if $order.extension eq 'groupbuy'}<span class="color8">[{$lang.groupbuy}]</span>{/if}</span>&nbsp;<a class="flag" target="_blank" href="{url app=seller_order&act=view&order_id=$order.order_id}"><span><!--{ if $order.memo eq ''}-->暂时没有备忘信息<!--{else}-->{$order.memo}<!--{/if}--></span><img src="themes/mall/default/styles/default/images/op_memo_{$order.flag}.png"></a></td>
+                        <td class="align2">{$order.buyer_name|escape}</td>
+                        <td class="align2">{$order.consignee|escape}</td>
+                        <td class="align2"><!--{ if $order.phone_mob neq ''}-->{$order.phone_mob}<!--{else}-->{$order.phone_tel}<!--{/if}--><br />
+</td>
+                        <td class="align2">{$order.payment_name|escape}</td>
+                        <td class="align2 padding1"><strong>{$order.order_amount|price}</strong></td>
+                        <td class="align2 ">{$order.add_time|date:complete}</td>
+                        <td class="align2"><span class="color4">{$order.status|modifier:order_status}<!--{if $order.evaluation_status}-->,&nbsp;{$lang.already_evaluate}<!--{/if}--></span></td>
+                    </tr>
+                    <tr class="line_bottom">
+                        <td colspan="9" align="right" class="order_form1"><div class="button_wrap">
+                        <input type="button" value="{$lang.received_pay}" class="btn" ectype="dialog" dialog_id="seller_order_received_pay" dialog_width="400" uri="index.php?app=seller_order&amp;act=received_pay&amp;order_id={$order.order_id}&ajax" dialog_title="{$lang.received_pay}" id="order{$order.order_id}_action_received_pay"{if $order.status neq ORDER_PENDING} style="display:none"{/if} />
+                        <input type="button" value="{$lang.confirm_cod_order}" class="btn1" ectype="dialog" uri="index.php?app=seller_order&amp;act=confirm_order&amp;order_id={$order.order_id}&ajax" dialog_id="seller_order_confirm_order" dialog_title="{$lang.confirm_cod_order}"  dialog_width="400" id="order{$order.order_id}_action_confirm"{if $order.status neq ORDER_SUBMITTED} style="display:none"{/if} />
+                        <input type="button" value="{$lang.adjust_fee}" class="btn1" uri="index.php?app=seller_order&amp;act=adjust_fee&amp;order_id={$order.order_id}&ajax" dialog_width="450" dialog_title="{$lang.adjust_fee}" ectype="dialog"  dialog_id="seller_order_adjust_fee" id="order{$order.order_id}_action_adjust_fee"{if $order.status neq ORDER_PENDING and $order.status neq ORDER_SUBMITTED} style="display:none"{/if} />
+                        <input type="button" value="{$lang.shipped_order}" class="btn1" ectype="dialog" dialog_title="{$lang.shipped_order}" dialog_id="seller_order_shipped" uri="index.php?app=seller_order&amp;act=shipped&amp;order_id={$order.order_id}&ajax"  dialog_width="400" id="order{$order.order_id}_action_shipped"{if $order.status neq ORDER_ACCEPTED} style="display:none"{/if} />
+                        <!--//已发货-->
+                        <input type="button" value="{$lang.finish_order}" class="btn1" ectype="dialog" dialog_id="seller_order_finished"  dialog_title="{$lang.finish_order}" uri="index.php?app=seller_order&amp;act=finished&order_id={$order.order_id}&ajax" dialog_width="400"  id="order{$order.order_id}_action_finish"{if $order.payment_code neq 'cod' or $order.status neq ORDER_SHIPPED} style="display:none"{/if} />
+                        <input type="button" value="{$lang.edit_invoice_no}" class="btn1" ectype="dialog" dialog_title="{$lang.edit_invoice_no}" uri="index.php?app=seller_order&amp;act=shipped&amp;order_id={$order.order_id}&ajax" dialog_id="seller_order_shipped" dialog_width="400" id="order{$order.order_id}_action_edit_invoice_no"{if $order.status neq ORDER_SHIPPED} style="display:none"{/if} />
+                        <!-- //不是取消和完成的订单就可以取消-->
+                        <input type="button" value="{$lang.cancel_order}" class="btn1" ectype="dialog" uri="index.php?app=seller_order&amp;act=cancel_order&order_id={$order.order_id}&ajax" dialog_title="{$lang.cancel_order}" dialog_id="seller_order_cancel_order" dialog_width="400" id="order{$order.order_id}_action_cancel"{if $order.status eq ORDER_CANCELED or $order.status eq ORDER_FINISHED} style="display:none"{/if} />
+                        <a class="btn1" href="{url app=seller_order&act=view&order_id=$order.order_id}" target="_blank">{$lang.view_order}</a>
+                       </div> </td>
+                    </tr>
+                    <!--{foreachelse}-->
+                    <tr><td class="member_no_records" colspan="8">{$lang.no_records}</td></tr>
+                    <!--{/foreach}-->
+                    <!--{if $orders}-->
+                    <tr><th class="width1"><input id="all2" type="checkbox" class="checkall_s" /></th>
+                    <th class="align1" colspan="7">
+                            <p class="position1">
+                                <label for="all2"><span class="all">{$lang.checkall}</span></label>
+                                <a href="javascript:;" class="delete" ectype="batchcancel" uri="index.php?app=seller_order&act=cancel_order" name="order_id">{$lang.cancel_order}</a>
+                            </p>
+                            <p class="position2">
+                                {include file=member.page.bottom.html}
+                            </p>
+                        </th>
+                    </tr>
+                    <!--{/if}-->
+                    </table>
+                    <iframe name="seller_order" style="display:none;"></iframe>
+        </div>
+    <div class="wrap_bottom"></div>
+    </div>
+</div>
+</div>
+<style>
+.flag{position:relative;}
+.flag span{ display:none;position:absolute; left:-70px;top:20px;width:170px;z-index:999;background:#fffCF3;border:#F7E4A5 solid 1px;padding: 8px 10px 5px;}
+.flag:hover span{display:block;}
+input[type="radio"] {margin:0 3px;}
+</style>
+<div class="clear"></div>
+</div>
+{include file=footer.html}

@@ -1,0 +1,83 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="{$site_url}/" />
+<!-- Use IE7 mode -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7 charset={$charset}" />
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+{$page_seo}
+<meta name="author" content="" />
+<meta name="generator" content="" />
+<meta name="copyright" content="" />
+<link href="{res file=css/new/w_common.css}" rel="stylesheet" type="text/css" />
+<link href="{res file=css/new/new.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="{res file=js/new/jquery-1.8.0.min.js}" charset="utf-8"></script>
+</head>
+{include file=new_headero.html}
+<link href="{res file=css/ecmall.css}" rel="stylesheet" type="text/css" />
+<script src="http://mallweb.changxiao.cn/js/jquery.js"></script>
+<script src="{res file=js/nav.js}"></script>
+<script src="{res file=js/select.js}"></script>
+<div class="content">
+    <div class="module_common">
+        <h2></h2>
+        <div class="wrap">
+            <div class="wrap_child">
+
+                <div class="module_new_shop">
+
+                    <div class="chart">
+                        <div class="pos_x1 bg_a2" title="{$lang.step_1}"></div>
+                        <div class="pos_x2 bg_b1" title="{$lang.step_2}"></div>
+                        <div class="pos_x3 bg_c" title="{$lang.step_3}"></div>
+                    </div>
+
+                    <div class="grade_shop">
+                        <table>
+                        <!--{foreach from=$sgrades item=sgrade}-->
+                            <tr>
+                                <th>{$sgrade.grade_name}</th>
+                                <td class="padding1 width5">
+                                    <p>上传商品: <span class="fontColor1">{$sgrade.goods_limit} 款</span></p>
+                                    <p>商城模板数: <span class="fontColor1">{$sgrade.skin_limit} 套</span></p>
+                                    <p>收&nbsp;费&nbsp;标&nbsp;准 : <span class="fontColor2">{$sgrade.charge}</span></p>
+                                  
+                                </td>
+                                <td class="width4">
+                                	<!--{if $sgrade['dnum']>0}-->
+                                        淘宝商品导入:<span class="fontColor2"> 支持</span>
+                                        <br/>
+                                    <!--{else}-->
+                                        &nbsp;
+                                    <!--{/if}-->
+                                   <!--{if $sgrade['dnum']>1}-->
+                                        微信互动功能:<span class="fontColor1"> 6 种</span>
+                                    <!--{else}-->
+                                        &nbsp;
+                                    <!--{/if}-->
+                                </td>
+                                <td class="width6 padding2">
+                                	<!--{if $sgrade['dnum']>2}-->
+                                        团购功能:<span class="fontColor2"> 支持</span>
+                                        <br/>
+                                        独立手机APP生成:<span class="fontColor2"> 支持</span>
+                                    <!--{else}-->
+                                        &nbsp;
+                                    <!--{/if}-->
+                                </td>
+                                <td><a href="{url app=apply&step=2&id=$sgrade.grade_id}" class="shop_btn">{$lang.soon_open}</a></td>
+                            </tr>
+                        <!--{/foreach}-->
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+{include file=footer.html}

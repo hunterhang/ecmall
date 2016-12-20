@@ -1,0 +1,30 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>用户提现</p>
+  <ul class="subnav">
+
+  </ul>
+</div>
+
+<div class="mrightTop">
+  <div class="fontl">
+    <form method="POST">
+       <div class="left">
+          <input type="hidden" name="app" value="indent" />
+          <input type="hidden" name="act" value="get_jifen" />
+          <input type="hidden" name="user_id" value="{$info.user_id}"> 
+        会员名:
+          <input class="queryInput" type="text" name="user_name" value="{$info.user_name}" />
+         积分:
+        <input class="queryInput" type="text" name="jifen" value="{$info.jifen}" />
+          <input type="submit" class="formbtn" value="确定修改" />
+      </div>
+    </form>
+  </div>
+  <div class="fontr">{include file=page.top.html}</div>
+</div>
+<div class="tdare">
+  
+
+</div>
+{include file="footer.html"}

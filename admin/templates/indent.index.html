@@ -1,0 +1,90 @@
+{include file="header.html"}
+<div id="rightTop">
+  <p>用户充值</p>
+  <ul class="subnav">
+    <li><span>{$lang.manage}</span></li>
+   <!-- <li><a class="btn1" href="index.php?app=user&amp;act=add">{$lang.add}</a></li>-->
+  </ul>
+</div>
+
+<div class="mrightTop">
+  <div class="fontl">
+    <form method="get">
+       <div class="left">
+          <input type="hidden" name="app" value="indent" />
+          <input type="hidden" name="act" value="index" />
+        会员名:
+          <input class="queryInput" type="text" name="user_name" value="{$smarty.get.user_name|escape}" />
+         状态:
+          <select class="querySelect" name="status">{html_options options=$status_options selected=$smarty.get.status}
+          </select>
+          <input type="submit" class="formbtn" value="{$lang.query}" />
+      </div>
+      <!--{if $filtered}-->
+      <a class="left formbtn1" href="index.php?app=indent">{$lang.cancel_query}</a>
+      <!--{/if}-->
+    </form>
+  </div>
+  <div class="fontr">{include file=page.top.html}</div>
+</div>
+<div class="tdare">
+  <table width="100%" cellspacing="0" class="dataTable">
+    <!--{if $indents}-->
+    <tr class="tatr1">
+      <td width="20" class="firstCell"><input type="checkbox" class="checkall" /></td>
+      <td>订单名称</td>
+      <td><span ectype="order_by" fieldname="user_name">充值用户</span></td>
+      <td>订单号</td>
+      <td><span ectype="order_by" fieldname="money">金额</span></td>
+      <td><span ectype="order_by" fieldname="add_time">充值时间</span></td>
+      <td><span ectype="order_by" fieldname="status">状态</span></td>
+      <td class="handler">{$lang.handler}</td>
+    </tr>
+    <!--{/if}-->
+    <!--{foreach from=$indents item=indent}-->
+    <tr class="tatr2">
+      <td class="firstCell"><input type="checkbox" class="checkitem" value="{$indent.id}" /></td>
+      <td>{$indent.title}</td>
+      <td>{$indent.user_name}</td>
+      <td>{$indent.out_trade_no}</td>
+      <td>{$indent.money}</td>
+      <td>{$indent.add_time|date:complete}</td>
+      <td> 
+       <!-- {if $indent.status eq 0} -->
+       <font style="color:red;">未付款</font>
+       <!-- {elseif $indent.status eq 1} -->
+        <font style="color:blue;"> 已付款,待确认</font>
+       <!-- {elseif $indent.status eq 2} -->
+         <font style="color:green;">完成</font>
+       <!-- {/if} -->
+      </td>
+      <td class="handler">
+      <span style="width: 100px">
+          <!-- {if $indent.status eq 0} -->
+          <a href="javascript:drop_confirm('是否确定入金?', 'index.php?app=indent&amp;act=sents&amp;user_id={$indent.user_id}&amp;money={$indent.money}&amp;id={$indent.id}');">入金</a>|
+       <!-- {elseif $indent.status eq 1} -->
+       <a href="javascript:drop_confirm('是否已经确定?', 'index.php?app=indent&amp;act=sent&amp;user_id={$indent.user_id}&amp;id={$indent.id}');">待确认</a>|
+       <!-- {elseif $indent.status eq 2} -->
+        完成|
+       <!-- {/if} -->
+      <a href="javascript:drop_confirm('是否删除该条充值记录?', 'index.php?app=indent&amp;act=drop&amp;id={$indent.id}');">删除</a>
+      </span>
+      </td>
+    </tr>
+    <!--{foreachelse}-->
+    <tr class="no_data">
+      <td colspan="10">{$lang.no_data}</td>
+    </tr>
+    <!--{/foreach}-->
+  </table>
+  <!--{if $indents}-->
+  <div id="dataFuncs">
+    <div id="batchAction" class="left paddingT15"> &nbsp;&nbsp;
+      <input class="formbtn batchButton" type="button" value="{$lang.drop}" name="id" uri="index.php?app=indent&act=drop" presubmit="confirm('{$lang.drop_confirm}');" />
+    </div>
+    <div class="pageLinks">{include file=page.bottom.html}</div>
+    <div class="clear"></div>
+  </div>
+  <!--{/if}-->
+</div>
+{include file="footer.html"}

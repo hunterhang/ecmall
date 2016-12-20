@@ -1,0 +1,57 @@
+{include file=member.header.html}
+<div class="content">
+    <div class="totline"></div><div class="botline"></div>
+    {include file=member.menu.html}
+    <div id="right">
+
+          {include file=make_money.submenu.html}
+
+        <div class="wrap">
+           
+
+            <div class="public table">
+                <table class="table_head_line">
+                    <!--{if $tuijian_logs}-->
+                    <tr class="line_bold">
+                        <th colspan="4"></th>
+                    </tr>
+                    <tr class="line tr_color">
+                        <th>好友名称</th>
+                        <th class="width3">充值的金额</th>
+                         <th class="width3">返还的积分</th>
+                          <th class="width3">充值时间</th>
+                    </tr>
+                    <!--{/if}-->
+                    <!--{foreach from=$tuijian_logs item=tuijian_log }-->
+                    <tr class="line tr_align">
+                        <td>{$tuijian_log.user_name}</td>
+                         <td>{$tuijian_log.price}</td>
+                          <td>{$tuijian_log.jifen}</td>
+                        <td>{$tuijian_log.add_time|date:Y-m-d H:i}</td>
+                    </tr>
+                    <!--{foreachelse}-->
+                    <tr>
+                        <td colspan="4" class="member_no_records padding6">对不起您推荐的好友还没充值，<a href="index.php?app=make_money">点击去推荐吧.</a></td>
+                    </tr>
+                    <!--{/foreach}-->
+                </table>
+            </div>
+            <div class="wrap_bottom"></div>
+        </div>
+
+        <div class="clear"></div>
+        <div class="adorn_right1"></div>
+        <div class="adorn_right2"></div>
+        <div class="adorn_right3"></div>
+        <div class="adorn_right4"></div>
+    </div>
+
+    <div class="clear"></div>
+
+
+
+
+</div>
+<iframe id='iframe_post' name="iframe_post" frameborder="0" width="0" height="0">
+</iframe>
+{include file=footer.html}

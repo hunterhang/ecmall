@@ -1,0 +1,10 @@
+    <div class="footer">
+    	<p>
+        	<a href="<?php if($_SESSION['wxstore_id']){ echo "index.php?app=store&id=".$_SESSION['wxstore_id']; }else{echo "javascript:history.back(-1);";}?>">商铺首页</a>|
+            <a href="{url app=buyer_order}">会员中心</a>|
+            <a href="<?php if($_SESSION['wxstore_id']){ echo "index.php?app=store&act=about&id=".$_SESSION['wxstore_id']; }else{echo "javascript:void(0);";}?>">关于我们</a>
+        </p>
+       <!-- <p>Copyright &copy;2014 xxxx.com</p>-->
+    </div> 
+</body>
+</html>

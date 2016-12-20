@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>锦尚中国 微信商城</title>
+<link href="css/common.css" type="text/css" rel="stylesheet" />
+<link href="css/user.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+<body class="gray" style="overflow-x:hidden;">
+
+    <div class="fixed">
+        <!---头部------>
+        <div class="header header2">
+			<a href="index.html" class="back2_index"></a>
+            个人中心
+           <a href="bookmark.html" class="bookmark"></a>
+        </div>    
+    </div>
+    <!---------个人中心头部--------------->
+    <div class="user_header">
+    	<div class="user_photo">
+        	<img src="images/user.jpg" />
+        </div>
+        <span class="user_name">秋刀鱼Bin</span>
+    	<div class="order_panel">
+            <ul class="orders">
+                <a href="#">
+                    <li>
+                        <span class="num on">2</span>
+                        <span>待付款</span>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <span class="num">0</span>
+                        <span>待发货</span>
+                        <b></b>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <span class="num">0</span>
+                        <span>待收货</span>
+                        <b></b>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <span class="num">0</span>
+                        <span>待评价</span>
+                        <b></b>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <a href="#" class="set_address">收货地址管理</a>
+        <script>
+        $(function(){
+			$(".set_address").click(function(){
+				$(this).toggleClass("set_address_show");
+				})
+			})
+        </script>
+    </div>
+    <!--------订单为空时------------>
+    <div class="null" style="display:none; margin-top:120px;">
+        <p><img src="images/order_null.png" /></p>
+        <p>你没有订单信息~</p>
+        <p><a href="#" class="white_btn">去购物</a></p>
+    </div>
+    <!------------订单页--------------------------->
+    <div class="u_order">
+    	<div class="orderbox">
+        	<h2><span><i></i>裂帛旗舰店</span><b>2013-10-17  10:01:09</b></h2>
+            <div class="detail">
+                <img src="images/goods1.jpg" />
+                <p class="title">裂帛女装 2013新款夏装双层A字型宽松方领 短袖雪纺衫</p>
+                <p>价格：<strong>￥149.00</strong><span>数量：1</span></p>
+                <p class="opr"><a href="#" class="white_btn">付款</a><a href="#" class="white_btn">取消</a><a href="order_detail.html" class="white_btn">订单详情</a></p>
+            </div>
+        </div>
+    	<div class="orderbox">
+        	<h2><span><i></i>裂帛旗舰店</span><b>2013-10-17  10:01:09</b></h2>
+            <div class="detail">
+                <img src="images/goods2.jpg" />
+                <p class="title">裂帛正品 2013新款夏装 圆领花色连肩袖T恤女短袖 打底衫32130029</p>
+                <p>价格：<strong>￥159.00</strong><span>数量：1</span></p>
+                <p class="opr"><a href="#" class="white_btn">付款</a><a href="#" class="white_btn">取消</a><a href="order_detail.html" class="white_btn">订单详情</a></p>
+            </div>
+        </div>
+    </div>
+     <!--------翻页-------------->
+    <div class="page">
+    	<a class="white_btn">上一页</a>
+        <a class="white_btn selected">
+        	1 / 2 ∨
+            <select>
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </a>
+        <a class="white_btn">下一页</a>
+    </div>
+    <!------底部-------->
+    <div class="footer">
+    	<p>
+        	<a href="index.html">商铺首页</a>|
+            <a href="user.html">会员中心</a>|
+            <a href="#">关于我们</a>
+        </p>
+        <p>Copyright &copy;2014 </p>
+    </div> 
+</body>
+</html>

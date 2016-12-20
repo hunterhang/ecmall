@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+	.price_table{ border:#E2E2E2 solid 1px; width:1079px; padding:10px; background:#f5f5f5;}
+	.price_tit{ font-weight:normal; font-size:16px; padding:10px;background:#fff; font-weight:bold;}	
+	.price{text-align:center;}
+	.price td{border-bottom:1px solid #E2E2E2; border-right:1px solid #E2E2E2;}
+	.price tr{ background:#fff;}
+	.price thead td{ padding:20px 0;}
+	.price tbody td{ padding:10px 0;}
+	.price .tip{ background:#fff; color:#666; font-weight:bold; font-size:14px;}
+	.prices td{ color:#52A405; font-size:14px;}
+	.prices td strong{ font-family:Georgia,Microsoft YaHei,Times,serif; font-size:18px; color:#52A405;}
+	.muban{ width:978px; margin:0 auto;}
+	#carousel {position:relative; margin: 20px 0 20px 34px; width:1010px; border:#ddd solid 1px;padding:10px 0 10px 10px; background:#fff;}
+	#carousel li{font-size: 40px;color: #999;text-align: center;display: block;width: 190px;  float: left; margin-right:10px;position: relative; padding-bottom:19px;background:url(../../images/new/shadow_bottom.png) no-repeat bottom center;}
+	#carousel li a{  display:block;border:#ddd solid 1px;}
+	#carousel li img {width:170px; padding:8px;}
+	#carousel li span{ display:none; position:absolute; left:0; top:0;height:100%; width:194px; height:308px;background:#000;opacity:0.6;filter:alpha(opacity=60);}
+	#carousel li .codes{ display:none;width:150px; height:150px;position:absolute; z-index:99; left:10px; top:70px;}
+	#carousel li a:hover span,#carousel li a:hover .codes{ display:block;}
+	#carousel .prev, #carousel .next {
+		background: url(../../images/new/carousel_control.png) no-repeat 0 0;
+		text-indent: -999px;display: block;overflow: hidden;
+		width:30px;height:56px;margin-left: 10px;position: absolute;top:160px;
+	}
+	#carousel .prev {background-position: 0 0;left: -40px;}			
+	#carousel .next {background-position:-30px 0;right: -30px;}			
+	#carousel .pager {text-align: center;margin: 20px auto 0;}
+	#carousel .pager a {
+		background: transparent url(../../images/new/carousel_control.png) no-repeat -2px -32px;
+		text-decoration: none;text-indent: -999px;display: inline-block;
+		overflow: hidden;width: 8px;height: 8px;margin: 0 5px 0 0;
+	}
+	#carousel .pager a.selected {
+		background: url(../../images/new/carousel_control.png) no-repeat -12px -32px;
+		text-decoration: underline;				
+	}
+	.reminder {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #E2E2E2;
+    border-right: 1px solid #E2E2E2;
+    margin: 10px 0 0;
+    padding: 10px;
+}
+.reminder li {
+    font-size: 13px;
+    list-style: square outside none;
+    margin: 2px 0 2px 20px;
+}

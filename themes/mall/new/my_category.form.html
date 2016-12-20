@@ -1,0 +1,168 @@
+<script type="text/javascript">
+$(function(){
+    $('#category_form').validate({
+/*        errorPlacement: function(error, element){
+            var _message_box = $(element).parent().parent().parent().parent().find('#warning');
+            _message_box.find('#warning_info').hide();
+            _message_box.append(error);
+        },
+        success       : function(label){
+            label.addClass('validate_right').text('OK!');
+        },*/
+        errorLabelContainer: $('#warning'),
+        invalidHandler: function(form, validator) {
+           /*var errors = validator.numberOfInvalids();
+           if(errors)
+           {*/
+               $('#warning').show();
+           /*}
+           else
+           {
+               $('#warning').hide();
+           }*/
+        },
+        onfocusout : false,
+        onkeyup    : false,
+        rules : {
+            cate_name : {
+                required : true,
+                remote   : {
+                url :'index.php?app=my_category&act=check_category',
+                type:'get',
+                data:{
+                    cate_name : function(){
+                        return $('#cate_name').val();
+                    },
+                    parent_id : function() {
+                        return $('#parent_id').val();
+                    },
+                    id : '{$gcategory.cate_id}'
+                  }
+                }
+            },
+            sort_order : {
+                number   : true
+            },
+            cate_images   : {
+               accept   : 'png|jpe?g|gif'
+                }
+        },
+        messages : {
+            cate_name : {
+                remote   : '{$lang.name_exist}',
+                required : '{$lang.cate_name_empty}'
+
+            },
+            sort_order  : {
+                number   : '{$lang.number_only}'
+            },
+            cate_images  : {
+              accept : '请上传格式为 jpg,jpeg,png,gif 的文件'
+             }
+        }
+    });
+});
+</script>
+
+
+<ul class="tab">
+    <li class="active"><!--{if $smarty.get.act eq add}-->{$lang.gcategory_add}<!--{else}-->{$lang.edit}<!--{/if}--></li>
+</ul>
+<div class="eject_con">
+ <div class="adds">
+        <div id="warning"></div>
+        <form id="category_form" method="post"  enctype="multipart/form-data"  target="pop_warning" action="index.php?app=my_category&amp;act={$smarty.get.act}<!--{if $smarty.get.id}-->&amp;id={$smarty.get.id}<!--{/if}-->">
+        <ul style="width:100%;">
+            <li style="width:100%;">
+                <h3>{$lang.cate_name}:</h3>
+                <p><input class="text width_normal" type="text" name="cate_name" id="cate_name" value="{$gcategory.cate_name|escape}" /><label class="field_notice"></label></p>
+            </li>
+            <li style="width:100%;">
+                <h3>{$lang.parent_id}:</h3>
+                <p><select name="parent_id" id="parent_id">
+                <option>{$lang.select_pls}</option>
+                {html_options options=$parents selected=$gcategory.parent_id}
+                </select></p>
+            </li>
+          <!--  <li style="width:100%;">
+            <h3>栏目图片链接:</h3>
+            <p><input type="text" style="width:350px;" name="cate_images" id="cate_images" value="{$gcategory.cate_images}" />图片尺寸120*120</p>
+            </li>-->
+              <li style="width:100%;">
+            <h3>栏目图片:</h3>
+            <p>  <!--{if $gcategory.cate_images neq ''}--><img style="width:50px;height:50px;" src="{$gcategory.cate_images}"><!--{/if}-->
+            <input style="width:132px;" name="cate_images" type="file" size="1" maxlength="0" hidefocus="true" ectype=""  /><label class="field_notice">图片尺寸120*120,大小不要超过100kb,不上传使用默认</label></p>
+            </li>
+            <input type="hidden" name='cate_images_value' value="{$gcategory.cate_images}" >
+            <li style="width:100%;">
+                <h3>{$lang.sort_order}:</h3>
+                <p><input type="text" name="sort_order" value="{$gcategory.sort_order}"  class="text width_short"/></p>
+            </li>
+            <li style="width:100%;">
+                <h3>{$lang.if_show}:</h3>
+                <p><label>
+                 <input type="radio" name="if_show" value="1" {if $gcategory.if_show}checked="checked"{/if} />
+                {$lang.yes}</label>
+                <label>
+                <input type="radio" name="if_show" value="0" {if !$gcategory.if_show}checked="checked"{/if} />
+                {$lang.no}</label></p>
+            </li>
+            <script>
+            $(function(){
+            	   $('input[ectype="type"]').change(function(){
+            	   	if($(this).val()==1)
+            	   	{
+            	   		$('#check_article').hide();
+            	   		$('#check_article2').hide();
+            	   	}else if($(this).val()==2)
+            	   	{
+            	   		$('#check_article').show();
+            	   		$('#check_article2').show();
+            	   	}
+            	   });
+            	   
+            	   var type="{$gcategory.article_link}";
+            	  if(type!='')
+            	  {
+            	  	$('#check_article').show();
+            	   		$('#check_article2').show();
+            	  }
+            	  
+            	   
+            })
+            </script>
+            <li style="width:100%;" >
+            <h3>选择类型:</h3>
+            <p><input type="radio" checked ectype='type' name="type" value="1">商品类型<input  {if $gcategory.article_link}checked="checked"{/if}ectype='type' type="radio" name="type" value="2" >文章类型</p>
+            </li>
+              <li id="check_article" style="width:100%;display:none;">
+               <h3>文章链接:</h3>
+              <!-- <p> <input type="text" name="article_link" style="width:450px;"  value="{$gcategory.article_link}"></p>-->
+               <p>
+               <select name="article_link">
+               <option value="">--请选择文章--</option>
+                 <!--{foreach from=$navigations item=navigation}-->
+                 <option <!--{if $gcategory.article_id eq $navigation['article_id'] }-->selected <!--{/if}--> value="{$navigation.article_id}">{$navigation.title}</option>
+                   <!--{/foreach}-->
+               </select>
+               <a style='width:78px;height:24px; line-height:24px;display:block;text-align:center;float:right;margin-left:10px;background:url("themes/mall/default/styles/default/images/member/btn.gif") no-repeat scroll 0 -590px rgba(0, 0, 0, 0)' target="_blank" href="{url app=my_navigation}">去添加文章</a>
+               </p>
+            </li>
+            <li id='check_article2' style="width:580px;display:none;">
+            <p style="color:red;width:580px;">根据实际情况选择,如果选择了的话，在店铺首页点击该栏目会跳转到此文章链接,只支持第一级栏目,不支持第二级栏目(子栏目)</p>
+            </li>
+            <!--{if $smarty.get.act eq edit}-->
+              <li style="width:100%;">
+               <h3>分类链接:</h3>
+               <p> <input style="width:450px;"  readonly value="{$site_url}/index.php?app=store&id={$gcategory.store_id}&act=search&cate_id={$gcategory.cate_id}&wx_store_id={$gcategory.store_id}"></p>
+            </li>
+            <li>
+            <p style="color:red;">分类链接主要是方便用户在微信内推广专用</p>
+            </li>
+          <!--{/if}-->
+          
+        </ul>
+        <div class="submit"><input type="submit" class="btn" value="{$lang.submit}" /></div>
+        </form>
+    </div>
+</div>

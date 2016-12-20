@@ -1,0 +1,53 @@
+{include file=member.header.html}
+<script type="text/javascript" src="{lib file=addkeyword.js}" charset="utf-8"></script>
+<link href="{res file=keyword/css/keyword.css}" rel="stylesheet" type="text/css" />
+<style>
+.borline td { padding:10px 0px; }
+.ware_list th { text-align:left; }
+</style>
+
+<div class="content">
+    {include file=member.menu.html}
+    <div id="right">
+          
+            <div class="wrap">
+              
+            <!--关键词自动回复-->
+        <div class="main_right">
+    	<a href="javascript:void(0);" class="addreply"><img src="themes/mall/default/styles/default/keyword/images/keywords_03.jpg" /></a>
+        <div class="list" id="add_zsc" style="display:none;"></div>
+        <!---------回复列表-------------->
+        
+           <!--{if $keyinfo}-->
+           <!--{foreach from=$keyinfo item=keyword}-->
+          <div class="list" style="position:relative">
+        	<h3>规则：{$keyword.kename}<a href="javascript:void(0);" id="zsc_btninfo{$keyword.kid}" class="add" onclick="zsc_show('{$keyword.kid}')"></a><a href="javascript:void(0);" class="del" id="zsc_del_{$keyword.kid}" onclick="zscdel('{$keyword.kid}')"></a></h3>
+            <div id="zsc_content_{$keyword.kid}">
+            	<p>关键字：{$keyword.kyword}</p>
+            	 <!--{if $keyword.type eq 1}-->
+            	 <p>回复：文本消息 </p>
+            	    <!--{else}-->
+                <p>回复：图文消息 </p>
+                    <!--{/if}-->
+            </div>
+        </div>
+          <!--{/foreach}-->
+          <!--{/if}-->
+          
+
+        <div id="localImag"><img id="preview" width=-1 height=-1 style="diplay:none" /></div>
+       </div>
+       <!---关键词自动回复 END--->     
+            
+            </div>
+
+            <div class="clear"></div>
+            <div class="adorn_right1"></div>
+            <div class="adorn_right2"></div>
+            <div class="adorn_right3"></div>
+            <div class="adorn_right4"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+{include file=footer.html}

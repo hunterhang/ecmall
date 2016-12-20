@@ -1,0 +1,83 @@
+<script type="text/javascript">
+<!--//<![CDATA[
+$(function(){
+    {$payment.onconfig}
+});
+//]]>-->
+</script>
+<ul class="tab">
+    <li class="active"><!--{if $smarty.get.act eq config}-->{$lang.config_payment}<!--{else}-->{$lang.install_payment}<!--{/if}--></li>
+</ul>
+<div class="eject_con">
+<!--{if  $smarty.get.code eq 'alipay'}-->
+	<div class="tan_btn">
+    	<a target="_blank" href="http://jingyan.baidu.com/article/27fa7326f52aa746f9271f6d.html">支付宝邮箱绑定教程</a>
+    </div>
+    <!--{/if}-->
+    <div class="info_table_wrap">
+        <form method="post" action="index.php?app=my_payment&amp;act={$smarty.get.act}&amp;code={$smarty.get.code}&amp;payment_id={$smarty.get.payment_id}" target="my_payment">
+        <ul class="info_table">
+            <li>
+                <h4>{$lang.payment_name}:</h4>
+                <p class="new_style">{$payment.name|escape}</p>
+            </li>
+           <li>
+                <h4>{$lang.payment_desc}</h4>
+                <p><textarea class="text" name="payment_desc">{$payment.payment_desc|escape}</textarea><span>{$lang.payment_desc_desc}</span></p>
+            </li>
+             <!--{if  $smarty.get.code eq 'cod'}-->
+            <li><h4></h4><p><a target="_blank" href="index.php?app=my_shipping" style="color:#39BAEA;">点击去设置货到付款地区</a></p></li>
+            <!--{/if}-->
+            <!--{if $smarty.get.code eq 'bank'}-->
+            <li>
+                <h4>图片链接:</h4>
+                <p>
+                    <input name="bank_images" value="{$payment.bank_images}" type="text" style="width:200px;" ><font style="color:red;">可不填,用于填写资质证明链接,提高信用度。</font>
+                </p>
+            </li>
+            <!--{/if} -->
+            <li>
+                <h4>{$lang.enabled}:</h4>
+                <p>
+                     {html_radios options=$yes_or_no checked=$payment.enabled name=enabled}
+                </p>
+            </li>
+            <li>
+                <h4>{$lang.sort_order}:</h4>
+                <p><input type="text" class="text width2" value="{$payment.sort_order}" name="sort_order"/><font>数字越小,用户选择付款方式时排越前面。</font></p>
+            </li>
+            <!--{foreach from=$payment.config item=info key=conf}-->
+            
+            <!-- {if $conf neq 'alipay_key' and  $conf neq 'alipay_partner' and  $conf neq 'alipay_service'  } -->
+            
+            <li>
+                <h4>{$info.text}:</h4>
+                <p><!--{if $info.type eq 'text'}--> 
+                <input type="text" name="config[{$conf}]" id="ctrl_{$conf}" value="{$config.$conf}" size="{$info.size}" onfocus="{$info.onfocus}" onchange="{$info.onchange}" onblur="{$info.onblur}" class="text"/>
+                <!--{elseif $info.type eq 'select'}-->
+                <select name="config[{$conf}]" id="ctrl_{$conf}" onchange="{$info.onchange}" class="width8 padding4">
+                       {html_options options=$info.items selected=$config.$conf}
+                 </select>
+                 <!--{elseif $info.type eq 'textarea'}-->
+                 <textarea cols="{$info.cols}" rows="{$info.rows}" name="config[{$conf}]" id="ctrl_{$conf}" onfocus="{$info.onfocus}" onchange="{$info.onchange}" onblur="{$info.onblur}" class="text" >{$config.$conf}</textarea>
+                 <!--{elseif $info.type eq 'radio'}-->
+                       {html_radios options=$info.items checked=$config.$conf name=$info.name}
+                 <!--{elseif $info.type eq 'checkbox'}-->
+                    {html_checkbox options=$info.items checked=$config.$conf name=$info.name}
+                 <!--{/if}-->
+                 <span>{$info.desc}</span>
+                 </p>
+            </li>
+            <!--{/if}--}-->
+            <!--{/foreach}-->
+            <!--{if $payment.is_online}-->
+            <li>
+                <h4>{$lang.payment_pcode}:</h4>
+                <p><input type="text" name="config[pcode]" value="{$config.pcode}" size="3" class="text" /><span>{$lang.pcode_desc}</span></p>
+            </li>
+            <!--{/if}-->
+        </ul>
+        <div class="submit"><input type="submit" class="btn" value="{$lang.submit}" /></div>
+        </form>
+    </div>
+</div>

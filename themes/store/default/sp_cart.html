@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>锦尚中国 微信商城</title>
+<link href="css/common.css" type="text/css" rel="stylesheet" />
+<link href="css/sp_cart.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+</head>
+<body class="gray">
+
+    <div class="fixed">
+        <!---头部------>
+        <div class="header header2">
+			<a href="index.html" class="back2_index"></a>
+            购物车
+            <div class="oprate">
+                <a href="javascript:;" class="white_btn">删除</a>
+                <a href="javascript:;" class="white_btn">全选</a>
+            </div>
+        </div>    
+    </div>
+    <!--------购物车为空时------------>
+    <div class="null" style="display:none;">
+        <p><img src="images/cart_null.png" /></p>
+        <p>你的购物车是空的<br />现在就去购物吧~</p>
+        <p><a href="#" class="white_btn">去购物</a></p>
+    </div>
+    
+    <div class="goods_list">
+    	<ul>
+        	<a href="#">
+            	<li>
+                	<input type="checkbox" class="c_check"/>
+                	<img src="images/goods1.jpg" />
+                    <p class="c_info">裂帛女装 2013新款夏装双层A字型宽松方领短袖雪纺衫</p>
+                    <p class="c_oprate">
+                    	<span class="price">价格：<strong>￥149.00</strong></span>
+                        <span class="white_btn" onclick="decrease_quantity();">-</span>
+                        <input type="text"  class="addtext" onkeyup="change_quantity(this);" id="input_item" orig="1" value="1"  changed="1"/>
+                        <span class="white_btn" onclick="add_quantity();">+</span>
+                        <span class="close">X</span>
+                    </p>
+                </li>
+            </a>
+            <a href="#">
+            	<li>
+                	<input type="checkbox" class="c_check"/>
+                	<img src="images/goods2.jpg" />
+                    <p class="c_info">裂帛正品 2013新款夏装 圆领花色连肩袖T恤女短袖 打底衫32130029</p>
+                    <p class="c_oprate">
+                    	<span class="price">价格：<strong>￥159.00</strong></span>
+                        <span class="white_btn" onclick="decrease_quantity();">-</span>
+                        <input type="text"  class="addtext" onkeyup="change_quantity(this);" id="input_item" orig="1" value="1"  changed="1"/>
+                        <span class="white_btn" onclick="add_quantity();">+</span>
+                        <span class="close">X</span>
+                    </p>
+                </li>
+            </a>
+        </ul>
+          <!---------数量js------------->
+            <script>
+			function decrease_quantity(){
+			var item = $('#input_item');
+			var orig = Number(item.val());
+			if(orig > 1){
+			item.val(orig - 1);
+			item.attr('changed',orig);
+			item.keyup();
+			}
+			}
+			function add_quantity(){
+			var item = $('#input_item');
+			var orig = Number(item.val());
+			item.attr('changed',orig);
+			item.val(orig + 1);
+			item.keyup();
+			}
+			</script>
+    </div>
+    <div class="count">
+    	<a>合计(不含运费): <strong>￥149.00</strong></a>
+        <a href="checkorder.html" class="jie">去结算</a>
+    </div>
+</body>
+</html>

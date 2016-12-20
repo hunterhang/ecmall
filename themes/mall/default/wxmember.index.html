@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+{$page_seo}
+<link href="/themes/mall/default/styles/wxmall/css/common.css" type="text/css" rel="stylesheet" />
+<link href="/themes/mall/default/styles/wxmall/css/user.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="/themes/mall/default/styles/wxmall/js/jquery-1.8.0.min.js"></script>
+</head>
+<body class="gray" style="overflow-x:hidden;">
+
+    <div class="fixed">
+        <!---头部------>
+        <div class="header header2">
+			<a href="index.html" class="back2_index"></a>
+            个人中心
+           <a href="/index.php?app=my_favorite" class="bookmark"></a>
+        </div>    
+    </div>
+    <!---------个人中心头部--------------->
+    <div class="user_header">
+    	<div class="user_photo">
+        	<img src="/themes/mall/default/styles/wxmall/images/user.jpg" />
+        </div>
+        <span class="user_name">{$visitor.user_name|escape}</span>
+    	<div class="order_panel">
+            <ul class="orders">
+                <a href="#">
+                    <li>
+                        <span class="num on">2</span>
+                        <span>待付款</span>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <span class="num">0</span>
+                        <span>待发货</span>
+                        <b></b>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <span class="num">0</span>
+                        <span>待收货</span>
+                        <b></b>
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <span class="num">0</span>
+                        <span>待评价</span>
+                        <b></b>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        <div class="set_address"><a href="index.php?app=my_address" >收货地址管理</a></div>
+        <script>
+        $(function(){
+			$(".set_address").click(function(){
+				$(this).toggleClass("set_address_show");
+				})
+			})
+        </script>
+    </div>
+    {include file=wxbuyer_order.index.html}
+     <!--------翻页-------------->
+    <div class="page">
+    	<a class="white_btn">上一页</a>
+        <a class="white_btn selected">
+        	1 / 2 ∨
+            <select>
+                <option>1</option>
+                <option>2</option>
+            </select>
+        </a>
+        <a class="white_btn">下一页</a>
+    </div>
+    <!------底部-------->
+    <div class="footer">
+    	<p>
+        	<a href="index.html">商铺首页</a>|
+            <a href="user.html">会员中心</a>|
+            <a href="#">关于我们</a>
+        </p>
+        <p>Copyright &copy;2014 </p>
+    </div> 
+</body>
+</html>

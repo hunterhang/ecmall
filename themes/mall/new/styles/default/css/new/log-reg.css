@@ -1,0 +1,15 @@
+@charset "utf-8";
+/* CSS Document */
+/* 注册 */
+.reg_box .text_box{ padding:8px; border:#ccc solid 1px;   border-radius: 2px; width:170px; background:#fff;}
+.reg_box .btn_box{ background:#014f97; border:#0920A6 solid 1px; cursor:pointer; color: #FFF;display: block;font: 18px/42px 微软雅黑; height: 42px;overflow: hidden; padding-bottom: 2px;text-align: center;text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);width: 188px;}
+.checking{ display:none;}
+.reg_panel{ background:url(../../images/new/reg_banner.jpg)  no-repeat right bottom; height:430px; position:relative;}
+.reg_box{ padding:50px 0 0 50px;}
+.reg_box label{ font-size:14px;}
+.reg_box .field_notice{ color:#999;}	
+.reg_box td{ padding:5px 0;}
+.reg_box .text_box{ margin-right:5px;}
+.reg_box .btn_box{ background:#1eb21f; border:#0E7610;}
+.reg_box .agreement{ color:#014f97; text-decoration:underline;}
+.reg_panel .to_log{ position:absolute;width:170px; height:50px; display:block; right:85px; top:130px;}

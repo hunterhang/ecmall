@@ -1,0 +1,15 @@
+Wed, 12 Mar 2014 22:54:42 +0000	[2]dir(D:\APMServ\www\htdocs/temp/caches) [<a href='function.dir'>function.dir</a>]: failed to open dir: No such file or directory	\includes\libraries\cache.lib.php	96
+Thu, 13 Mar 2014 02:15:45 +0000	[2]Invalid argument supplied for foreach()	\app\lunbo.app.php	2094
+Thu, 13 Mar 2014 02:16:03 +0000	[2]Invalid argument supplied for foreach()	\app\lunbo.app.php	2094
+Thu, 13 Mar 2014 02:16:06 +0000	[2]Invalid argument supplied for foreach()	\app\lunbo.app.php	2094
+Thu, 13 Mar 2014 02:16:08 +0000	[2]Invalid argument supplied for foreach()	\app\lunbo.app.php	2094
+Fri, 14 Mar 2014 02:31:42 +0000	[2]filemtime() [<a href='function.filemtime'>function.filemtime</a>]: stat failed for D:\APMServ\www\htdocs/data/crond.lock	\includes\libraries\cron.lib.php	132
+Sun, 23 Mar 2014 22:09:31 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Sun, 23 Mar 2014 22:09:57 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Sun, 23 Mar 2014 22:10:02 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Sun, 23 Mar 2014 22:11:45 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Sun, 23 Mar 2014 23:52:24 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Sun, 23 Mar 2014 23:53:27 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Mon, 24 Mar 2014 00:26:28 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Mon, 24 Mar 2014 00:26:41 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436
+Mon, 24 Mar 2014 00:26:51 +0800	[2]curl_setopt() [<a href='function.curl-setopt'>function.curl-setopt</a>]: CURLOPT_FOLLOWLOCATION cannot be activated when safe_mode is enabled or an open_basedir is set	/app/custom_menu.app.php	436

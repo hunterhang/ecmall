@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>锦尚中国 微信商城</title>
+<link href="css/common.css" type="text/css" rel="stylesheet" />
+<link href="css/address.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+
+<script>
+$(function(){
+   $(".add_address,.add_box .add_submit").click(function(){	   
+	   $(".add_box,.address_con").slideToggle(600);
+	   })
+	$(".edit_address").click(function(){
+		$(".address_con").hide(600);
+		$(".edit_box").show(600);
+		})
+	$(".edit_box .add_submit").click(function(){
+		$(".address_con").show(600);
+		$(".edit_box").hide(600);
+		})
+   })
+</script>  
+</head>
+<body style="background:#f7f7f7;">
+
+    <div class="fixed">
+        <!---头部------>
+        <div class="header header2">
+			<a href="javascript:history.back(-1);" class="back2_pre"></a>
+            收货地址
+            <a href="#" class="add_address"></a>
+        </div>  
+    </div>
+    <!-------添加收货地址------->
+    <div class="add_box" style="display:none">
+    	<p><input type="text" placeholder="请填写你的真实姓名"/></p>
+    	<p><input type="text" placeholder="请填写你的手机号码" /></p>
+    	<p>
+            <select>
+            	<option>请选择</option>
+            </select>
+        </p>
+        <p>
+            <select>
+            	<option>请选择</option>
+            </select>
+        </p>
+        <p>
+            <select>
+            	<option>请选择</option>
+            </select>
+        </p>
+        <p>
+            <input type="text" placeholder="不必重复填写地区" />
+        </p>
+    	<p><input type="text" placeholder="邮政编码"/></p>
+        <p><input type="checkbox"  class="mr"/>设为默认地址</p>
+        <p><a href="#" class="white_btn add_submit">确定</a></p>
+    </div>
+    <!-------编辑收货地址------->
+    <div class="edit_box" style="display:none">
+    	<p><input type="text" placeholder="请填写你的真实姓名" value="秋刀鱼"/></p>
+    	<p><input type="text" placeholder="请填写你的手机号码" value="18750940286" /></p>
+    	<p>
+            <select>
+            	<option>福建省</option>
+            </select>
+        </p>
+        <p>
+            <select>
+            	<option>厦门市</option>
+            </select>
+        </p>
+        <p>
+            <select>
+            	<option>思明区</option>
+            </select>
+        </p>
+        <p>
+            <input type="text" placeholder="不必重复填写地区" value="莲前西林西二里路金沙花园31号702" />
+        </p>
+    	<p><input type="text" placeholder="邮政编码" value="361000"/></p>
+        <p><input type="checkbox"  class="mr"/>设为默认地址</p>
+        <p><a href="#" class="white_btn add_submit">确定</a></p>
+    </div>
+	<!------收货地址---------->
+    <div class="address_con">
+        <div class="address_box" >
+            <div class="address_info">
+                <p>秋刀鱼（18750940286）</p>
+                <p>福建省 厦门市 思明区</p>
+                <p>莲前西林西二里路金沙花园31号702</p>
+            </div>
+            <p class="oprate"><a href="#" class="edit_address"><b></b>编辑<i></i></a><a href="#" class="del_address"><b></b>删除</a></p>
+        </div>
+        
+        <div class="address_box" >
+            <div class="address_info">
+                <p>秋刀鱼（18750940286）</p>
+                <p>福建省 厦门市 思明区</p>
+                <p>卧龙西路口</p>
+            </div>
+            <p class="oprate"><a href="#" class="edit_address"><b></b>编辑<i></i></a><a href="#" class="del_address"><b></b>删除</a></p>
+        </div>
+        
+        <div class="address_box" >
+            <div class="address_info">
+                <p>秋刀鱼（15280291091）</p>
+                <p>福建省 厦门市 思明区</p>
+                <p>火车站</p>
+            </div>
+            <p class="oprate"><a href="#" class="edit_address"><b></b>编辑<i></i></a><a href="#" class="del_address"><b></b>删除</a></p>
+        </div>   
+        <!--------翻页-------------->
+        <div class="page">
+            <a class="white_btn">上一页</a>
+            <a class="white_btn selected">
+                1 / 2 ∨
+                <select>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+            </a>
+            <a class="white_btn">下一页</a>
+        </div>
+    </div>
+    
+    <!------底部-------->
+    <div class="footer">
+    	<p>
+        	<a href="index.html">商铺首页</a>|
+            <a href="user.html">会员中心</a>|
+            <a href="#">关于我们</a>
+        </p>
+        <p>Copyright &copy;2014 </p>
+    </div> 
+</body>
+</html>
