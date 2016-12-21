@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<base href="{$site_url}/" />
+<!-- Use IE7 mode -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7 charset={$charset}" />
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+{$page_seo}
+<meta name="author" content="" />
+<meta name="generator" content="" />
+<meta name="copyright" content="" />
+<link href="{res file=css/new/w_common.css}" rel="stylesheet" type="text/css" />
+<link href="{res file=css/new/new.css}" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/js/jquery.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div>
+    {include file="new_headero.html"}
+    
+    <form id="submit_form" method="post" action="index.php?app=user_order&act=add_order" enctype="multipart/form-data">
+        <input type="file" name="old_img" id="old_img">        <!-- 添加上传文件 -->
+        <input type="file" name="new_img" id="new_img">
+        <input type="input" name = "goods_size" >
+        <input type="input" name = "close_type">
+        <input id="btn_temporary" type="submit" value="上传临时素材" /> 
+    </form>
+</div>    
+</body>
+</html>
+
+
+

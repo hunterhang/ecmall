@@ -1,15 +1,15 @@
 <?php
 /**
  *  @Created By ECMall PhpCacheServer
- *  @Time:2014-04-03 06:25:58
+ *  @Time:2016-12-20 04:43:16
  */
 
 if(filemtime(__FILE__) + 600 < time())return false;
 
 return array (
-  'inbox' => '1',
+  'inbox' => '0',
   'outbox' => '0',
-  'total' => 1,
+  'total' => 0,
 );
 
 ?>

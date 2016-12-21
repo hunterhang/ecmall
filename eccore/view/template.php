@@ -1396,48 +1396,74 @@ class ecsTemplate
             '/(href=["|\'])\.\.\/(.*?)(["|\'])/i',  // 替换相对链接
             '/((?:background|src)\s*=\s*["|\'])(?:\.\/|\.\.\/)?(images\/.*?["|\'])/is', // 在images前加上 $tmp_dir
             '/((?:background|background-image):\s*?url\()(?:\.\/|\.\.\/)?(images\/)/is', // 在images前加上 $tmp_dir
-            '/{nocache}(.+?){\/nocache}/is', //无缓存模块
+//            '/{nocache}(.+?){\/nocache}/ise', //无缓存模块
             );
+//        $pattern = array(
+//            '/<!--[^>|\n]*?({.+?})[^<|{|\n]*?-->/', // 替换smarty注释
+//            '/<!--[^<|>|{|\n]*?-->/',               // 替换不换行的html注释
+//            '/(href=["|\'])\.\.\/(.*?)(["|\'])/i',  // 替换相对链接
+//            '/((?:background|src)\s*=\s*["|\'])(?:\.\/|\.\.\/)?(images\/.*?["|\'])/is', // 在images前加上 $tmp_dir
+//            '/((?:background|background-image):\s*?url\()(?:\.\/|\.\.\/)?(images\/)/is', // 在images前加上 $tmp_dir
+//            '/{nocache}(.+?){\/nocache}/ise', //无缓存模块
+//            );
+//        $replace = array(
+//            '\1',
+//            '',
+//            '\1\2\3',
+//            '\1' . $tmp_dir . '\2',
+//            '\1' . $tmp_dir . '\2',
+//            "'{insert name=\"nocache\" ' . '" . $this->_echash . "' . base64_encode('\\1') . '}'",
+//            );
+//
         $replace = array(
             '\1',
             '',
             '\1\2\3',
             '\1' . $tmp_dir . '\2',
             '\1' . $tmp_dir . '\2',
-            "'{insert name=\"nocache\" ' . '" . $this->_echash . "' . base64_encode('\\1') . '}'",
+//            "'{insert name=\"nocache\" ' . '" . $this->_echash . "' . base64_encode('\\1') . '}'",
             );
 
+
         //todo:
-        //return preg_replace($pattern, $replace, $source);
-        return preg_replace_callback(
-            $pattern,
-            function($matches) use($tmp_dir){
-                foreach($matches as $k=>$v)
-                {
-                    if(strlen($v) > 0)
-                    {
-                        switch($k)
-                        {
-                            case 1:
-                                return $match[1];
-                            case 3:
-                                return $matches[1].$matches[2].$matches[3];
-                            case 4:
-                            case 5:
-                                return $matches[1].$tmp_dir.$matches[2];
-                            case 6:
-                                return "'{insert name=\"nocache\" ' . '" . $this->_echash . "' . base64_encode($matches[1]) . '}'";
-                            default:
-                                return "";
-                        };
-                    };
-                    return "";
-                };
-                print_r($matches);
-               //return ""; 
-            },
-            $source
-        );
+		$str =  preg_replace($pattern, $replace, $source);
+		return preg_replace_callback(
+			"/{nocache}(.+?){\/nocache}/is",
+			function($matches) 
+			{
+				return "'{insert name=\"nocache\" ' . '" . $this->_echash . "' . base64_encode($matches[1]) . '}'";
+			},
+			$str
+		);
+//        return preg_replace_callback(
+//            $pattern,
+//            function($matches) use($tmp_dir){
+//                foreach($matches as $k=>$v)
+//                {
+//                    if(strlen($v) > 0)
+//                    {
+//                        switch($k)
+//                        {
+//                            case 1:
+//                                return $match[1];
+//                            case 3:
+//                                return $matches[1].$matches[2].$matches[3];
+//                            case 4:
+//                            case 5:
+//                                return $matches[1].$tmp_dir.$matches[2];
+//                            case 6:
+//                                return "'{insert name=\"nocache\" ' . '" . $this->_echash . "' . base64_encode($matches[1]) . '}'";
+//                            default:
+//                                return "";
+//                        };
+//                    };
+//                    return "";
+//                };
+//                print_r($matches);
+//               //return ""; 
+//            },
+//            $source
+//        );
     }
 
     /*

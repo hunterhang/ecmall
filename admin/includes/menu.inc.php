@@ -211,6 +211,17 @@ return array(
             ),
         ),
     ),
+    // 扩展
+    'h_order' => array(
+        'text'      => "订单",
+        'default'   => 'h_order',
+        'children'  => array(
+            'plugin' => array(
+                'text'  => "用户订单",
+                'url'   => 'index.php?app=h_order',
+            )
+        ),
+    ),
 );
 
 ?>
