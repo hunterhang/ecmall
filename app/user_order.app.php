@@ -17,104 +17,103 @@ class User_orderApp extends MallbaseApp
         $this->assign('page_keywords', Conf::get('site_keywords'));
         $this->display('user_order.html');
     }
-	function add_order()
-	{
-		import('uploader.lib');
-		$data = array();
-		$ret = 0;
-		$msg = "success";
-		//检查数据
-		do{
-			if($_POST['goods_size'] == "")
-			{
-				$ret = -1;
-				$msg = "请选择需要改成的尺码";
-				break;
-			};
-			if($_POST['close_type'] == "")	
-			{
-				$ret = -2;
-				$msg = "请选择需要改成的尺码";
-				break;
-			};
-			
-			if($_FILES['old_img'] == "")
-			{
-				$ret = -3;
-				$msg = "请上传旧衣照片照片";
-				break;
-			};
-		
-			if($_FILES['new_img'] == "")
-			{
-				$ret = -4;
-				$msg = "请上传希望做成的照片";
-				break;
-			};
-			$data['goods_size'] = $_POST['goods_size'];
-			$data['close_type'] = $_POST['close_type'];	
-			//图片上传
-			$bUploadError = false;
-			foreach($_FILES as $key=>$val)
-			{
-				$file = $val;
-				if($file['error'] == UPLOAD_ERR_OK  && bUploadError == false)
-				{
-					$uploader = new Uploader();
-					$uploader->allowed_type(IMAGE_FILE_TYPE);
-					$uploader->allowed_size(SIZE_STORE_LOGO);
-					$uploader->addFile($file);
+    function check_param()
+    {
+        import('uploader.lib');
+        $data = array();
+        $ret = 0;
+        $msg = "success";
+        //检查数据
+        do{
+            if($_POST['goods_size'] == "")
+            {
+                $ret = -1;
+                $msg = "请选择需要改成的尺码";
+                break;
+            };
+            if($_POST['close_type'] == "")	
+            {
+                $ret = -2;
+                $msg = "请选择需要改成的尺码";
+                break;
+            };
+            if($_POST['old_img'] == "")	
+            {
+                $ret = -3;
+                $msg = "请重新上传旧衣照片";
+                break;
+            };
 
-					if ($uploader->file_info() === false)
-					{
-						$bUploadError = true;
-						$msg = $uploader->get_error();
-						$ret = -5;
-						break;
-					}
-					//print_r($file);
-					$uploader->root_dir(ROOT_PATH);
-					$url = $uploader->save('data/files/goods', $uploader->random_filename());
-					print_r($url);
-					$data[$key] = $url;
-				};
-			};
-		}while(0);
-		$data['ret'] = $ret;
-		$data['msg'] = $msg;
-		echo json_encode($data);
-		return ;
-	}
+            if($_POST['new_img'] == "")	
+            {
+                $ret = -4;
+                $msg = "请重新上传新衣照片";
+                break;
+            };
+            $data['goods_size'] = $_POST['goods_size'];
+            $data['close_type'] = $_POST['close_type'];	
+            $data['old_img'] = $_POST['old_img'];	
+            $data['new_img'] = $_POST['new_img'];	
+        }while(0);
+        $data['ret'] = $ret;
+        $data['msg'] = $msg;
+        echo json_encode($data);
+        return ;
+    }
 
+    function save_order()
+    {
+        if(IS_POST)
+        {
+            
+        
+        };
+    
+    }
 	function upload_img()
 	{
 		//数据检查
 		import('uploader.lib');
 		$data = array();
-		$file = $_FILES['old_img'];
-		if($file['error'] == UPLOAD_ERR_OK && $file != '')
-		{
-			$uploader = new Uploader();
-			$uploader->allowed_type(IMAGE_FILE_TYPE);
-			$uploader->allowed_size(SIZE_STORE_LOGO);
-			$uploader->addFile($file);
-
-			if ($uploader->file_info() === false)
+        $ret = 0;
+        $msg = "success";
+        $url = "";
+        foreach($_FILES as $key=>$val)
+        {
+            $file = $val;
+            if($file == "")
             {
-				$data['ret'] = -1;
-				$data['msg'] = $uploader->get_error();
-				echo json_encode($data);
-				return false;
+                $ret = -1;
+                $msg = "请选择图片";
+                break;
+            };
+            if($file['error'] != UPLOAD_ERR_OK)
+            {
+                $ret = -2;
+                $msg = "上传图片错误";
+                break;
+            };
+            $uploader = new Uploader();
+            $uploader->allowed_type(IMAGE_FILE_TYPE);
+            $uploader->allowed_size(SIZE_STORE_LOGO);
+            $uploader->addFile($file);
+
+            if ($uploader->file_info() === false)
+            {
+                $msg = $uploader->get_error();
+                $ret = -3;
+                break;
             }
-			//print_r($file);
+            //print_r($file);
             $uploader->root_dir(ROOT_PATH);
-            $data['store_logo'] = $uploader->save('data/files/goods/other', '111');
-			$data['ret'] = 0;
-			$data['msg'] = "success";
-			echo json_encode($data);
-			return ;
-		};
-		echo "error";
+            $url = $uploader->save('data/files/goods', $uploader->random_filename());
+            break;
+        };
+        $data['ret'] = $ret;
+        $data['msg'] = $msg;
+        $data['url'] = $url;
+        echo json_encode($data);
+        return ; 
 	}
     function _get_hot_keywords()
     {

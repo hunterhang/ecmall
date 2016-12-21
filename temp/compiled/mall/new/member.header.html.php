@@ -78,19 +78,19 @@ function openSubmenu(h1){
 <div class="nav">
     <ul class="auto">     
          
-      
+      <?php if (! $this->_var['visitor']['user_id']): ?>
             <form class="login_panel" action="<?php echo url('app=member&act=login'); ?>" method="post">
             	<li class="menu_li">用户名：<input type="text" class="l_text" name="user_name"/></li>
             	<li class="menu_li">密码：<input type="password"  class="l_text" name="password"/></li>
             	<li class="menu_li"><input type="submit" value="登录" class="lr_btn"/><input onclick="window.location.href='<?php echo url('app=member&act=register&ret_url=' . $this->_var['ret_url']. ''); ?>';" type="button" value="注册" class="lr_btn"/></li>
         	</form>
-        
+        <?php else: ?>
            <li class="menu_li logined">欢迎您！
               <a href="<?php echo url('app=member'); ?>"><?php echo htmlspecialchars($this->_var['visitor']['user_name']); ?></a>
               <a href="<?php echo url('app=member'); ?>">管理中心</a>
               <a href="<?php echo url('app=member&act=logout'); ?>">退出</a>
            </li>
-        
+        <?php endif; ?>
     </ul>
 </div>
 

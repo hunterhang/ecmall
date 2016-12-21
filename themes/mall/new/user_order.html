@@ -1,33 +1,124 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html class="" lang="zh-cmn-Hans">
 <head>
-<base href="{$site_url}/" />
-<!-- Use IE7 mode -->
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7 charset={$charset}" />
-<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
-{$page_seo}
-<meta name="author" content="" />
-<meta name="generator" content="" />
-<meta name="copyright" content="" />
-<link href="{res file=css/new/w_common.css}" rel="stylesheet" type="text/css" />
-<link href="{res file=css/new/new.css}" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/js/jquery.js" charset="utf-8"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>订单</title>
+    <meta name="keywords" content="有赞,有赞商城,有赞微商城,移动零售,微信商城,大流量,更好玩">
+    <meta name="description" content="有赞定位为移动零售服务商！有赞微商城，面向线下实体商家和线上传统电商进行服务，有完整的客户管理和在线营销解决方案，以及客户管理+在线营销+硬件接入+开放数据等强大的功能。且有大流量定期专场活动，百万免费流量支持。
+有赞平台还拥有超过百项特色功能，丰富有趣的营销应用，精准的数据分析等，是您加入移动互联网进行零售升级的新契机！">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+    <meta name="referrer" content="always">
+    <link rel="shortcut icon" href="https://b.yzcdn.cn/v2/image/yz_fc.ico">
+    <link href="{res file=css/style.css}" rel="stylesheet" type="text/css" />
 </head>
-<body>
+<body class="body-fixed-bottom">
 
-<div>
-    {include file="new_headero.html"}
-    
-    <form id="submit_form" method="post" action="index.php?app=user_order&act=add_order" enctype="multipart/form-data">
-        <input type="file" name="old_img" id="old_img">        <!-- 添加上传文件 -->
-        <input type="file" name="new_img" id="new_img">
-        <input type="input" name = "goods_size" >
-        <input type="input" name = "close_type">
-        <input id="btn_temporary" type="submit" value="上传临时素材" /> 
-    </form>
-</div>    
+<div class="container " style="min-height: 638px;">
+    <div class="header">
+    </div>
+    <div class="content">
+        <!--订单-->
+        <div class="content-body js-page-content clearfix">
+            <div class="custom-title">
+                <h2 class="title">
+                    订单
+                </h2>
+            </div>
+            <div class="sc-goods-list clearfix">
+                <form class="upload-file-wrap clearfix">
+                    <div class="upload-file">
+                        <div class="input-file">
+                            <img src="data/files/mall/settings/WE-logo.jpeg">
+                            <input type="file" name="old_img">
+                        </div>
+                        <p>旧衣</p>
+                    </div>
+                    <div class="upload-file">
+                        <div class="input-file">
+                            <img src="data/files/mall/settings/WE-logo.jpeg"/>
+                            <input type="file" name="new_img">
+                        </div>
+                        <p>希望改成</p>
+                    </div>
+                </form>
+                <div class="goods-meta clearfix">
+                    <div class="td">
+                        <span class="type-name">尺码：</span>
+                        <ul class="type-ctn">
+                            <li>S</li>
+                            <li class="active">M</li>
+                            <li>XS</li>
+                            <li>XL</li>
+                        </ul>
+                    </div>
+                    <div class="td">
+                        <span class="type-name">款式：</span>
+                        <ul class="type-ctn">
+                            <li>上衣</li>
+                            <li>裤子</li>
+                            <li class="active">裙子</li>
+                            <li>大衣</li>
+                        </ul>
+                    </div>
+                    <div class="td">
+                        <span class="type-name">费用：</span>
+                        <ul class="type-ctn">
+                            <li class="active">19元</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="order-view.html" class="buy-response">
+                    <span class="buy">支付</span>
+                </a>
+            </div>
+        </div>
+        <!--订单 end-->
+
+        <div class="content-sidebar">
+            <a href="https://h5.koudaitong.com/v2/showcase/homepage?kdt_id=779281" class="link">
+                <div class="sidebar-section shop-card">
+                    <div class="table-cell">
+                        <img src="https://img.yzcdn.cn/upload_files/2016/12/06/148102842658643439.jpeg?imageView2/2/w/120/h/120/q/75/format/webp" width="60" height="60" class="shop-img" alt="公众号头像">
+                    </div>
+                    <div class="table-cell">
+                        <p class="shop-name">
+                            每美WE
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <div class="sidebar-section shop-info">
+                <div class="section-detail">
+                    <p class="shop-detail">私人定制，改制旧服，穿搭代购。
+                        WE's Outfit Inspiration 着衣灵感. (Elaine.wang不是设计师，你自己才是！）只穿你想要的！
+                    </p>
+                    <div class="section-detail">
+                        <p class="text-center weixin-title">微信“扫一扫”分享到朋友圈</p>
+                        <p class="text-center qr-code">
+                            <img width="158" height="158" src="https://h5.koudaitong.com/v2/common/url/create?type=homepage&amp;home%2Fyi11o4jm=&ampscan=3&amp;oid=0&amp;sf=wx_sm&amp;from=singlemessage&amp;isappinstalled=0&amp;alias=yi11o4jm">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="{lib file=jquery.js}" charset="utf-8"></script>
+<script>
+    $(".input-file input").height($('.input-file').width())
+    $(".upload-file img").height($('.upload-file img').width())
+    $(".js-open-follow").click("on",function(){
+        $("#js-share-guide").show();
+    })
+    $("#js-share-guide").click("on",function(){
+        $(this).hide();
+    })
+</script>
 </body>
-</html>
-
 
 
