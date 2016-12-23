@@ -32,7 +32,7 @@ class User_orderApp extends MallbaseApp
                 break;
             };
             if($_POST['close_type'] == "")	
-            {
+                {
                 $ret = -2;
                 $msg = "请选择需要改成的尺码";
                 break;
@@ -59,6 +59,66 @@ class User_orderApp extends MallbaseApp
         $data['msg'] = $msg;
         echo json_encode($data);
         return ;
+    }
+
+    function order_view()
+    {
+        $size = $_GET['size'];
+        $style = $_GET['style'];
+        $old_img = $_GET['o'];
+        $new_img = $_GET['n'];
+        $ret = 0;
+        $size_text = "未知";
+        switch ($size) {
+            case 1:
+                $size_text = "S";
+                break;
+            case 2:
+                $size_text = "M";
+                break;
+            case 3:
+                $size_text = "XS";
+                break;
+            case 4:
+                $size_text = "XL";
+                break;
+            default:
+                $ret = -1;
+                break;
+        }
+
+
+        $style_text = "未知";
+        switch ($style) {
+            case 1:
+                $style_text = "上衣";
+                break;
+            case 2:
+                $style_text = "裤子";
+                break;
+            case 3:
+                $style_text = "裙子";
+                break;
+            case 4:
+                $style_text = "大衣";
+                break;
+            default:
+                $ret = -1;
+                break;
+        }
+        $this->assign("select_size",$size_text);
+        $this->assign("select_style",$style_text);
+        $this->assign("old_img",$old_img);
+        $this->assign("new_img",$new_img);
+        $this->assign("send_amount",19);
+        $this->assign("total_amount",99);
+        $this->display('order_view.html');
+        return ;
+        if(!IS_POST)
+        {
+            return ;
+        };
+
     }
 
     function save_order()

@@ -14,7 +14,9 @@
     <meta name="referrer" content="always">
     <link rel="shortcut icon" href="https://b.yzcdn.cn/v2/image/yz_fc.ico">
     <link href="{res file=css/style.css}" rel="stylesheet" type="text/css" />
+    <link href="{res file=js/webuploader/webuploader.css}" rel="stylesheet" type="text/css" />
 </head>
+
 <body class="body-fixed-bottom">
 
 <div class="container " style="min-height: 638px;">
@@ -30,38 +32,38 @@
             </div>
             <div class="sc-goods-list clearfix">
                 <form class="upload-file-wrap clearfix">
-                    <div class="upload-file">
-                        <div class="input-file">
+                    <div class="upload-file" id="div_old_img">
+                        <div class="input-file" >
                             <img src="data/files/mall/settings/WE-logo.jpeg">
-                            <input type="file" name="old_img">
+                            <input type="file" name="old_img" id="input_old_img" data-url="/index.php?app=user_order&act=upload_img" url="" multiple>
                         </div>
                         <p>旧衣</p>
                     </div>
                     <div class="upload-file">
-                        <div class="input-file">
+                        <div class="input-file" id="div_new_img">
                             <img src="data/files/mall/settings/WE-logo.jpeg"/>
-                            <input type="file" name="new_img">
+                            <input type="file" name="new_img" id="input_new_img" data-url="/index.php?app=user_order&act=upload_img" url="">
                         </div>
                         <p>希望改成</p>
                     </div>
                 </form>
                 <div class="goods-meta clearfix">
-                    <div class="td">
+                    <div class="td" id="select_size">
                         <span class="type-name">尺码：</span>
                         <ul class="type-ctn">
-                            <li>S</li>
-                            <li class="active">M</li>
-                            <li>XS</li>
-                            <li>XL</li>
+                            <li val = "1">S</li>
+                            <li val = "2" class="active">M</li>
+                            <li val = "3">XS</li>
+                            <li val = "4">XL</li>
                         </ul>
                     </div>
-                    <div class="td">
+                    <div class="td" id="select_style">
                         <span class="type-name">款式：</span>
                         <ul class="type-ctn">
-                            <li>上衣</li>
-                            <li>裤子</li>
-                            <li class="active">裙子</li>
-                            <li>大衣</li>
+                            <li val = "1"  class="active">上衣</li>
+                            <li val = "2">裤子</li>
+                            <li val = "3">裙子</li>
+                            <li val = "4">大衣</li>
                         </ul>
                     </div>
                     <div class="td">
@@ -72,7 +74,7 @@
                     </div>
                 </div>
                 <a href="order-view.html" class="buy-response">
-                    <span class="buy">支付</span>
+                    <span class="buy" id = "pay">支付</span>
                 </a>
             </div>
         </div>
@@ -108,16 +110,76 @@
 
     </div>
 </div>
-<script type="text/javascript" src="{lib file=jquery.js}" charset="utf-8"></script>
+<script type="text/javascript" src="js/1.9.1.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/js_file_upload/jquery.iframe-transport.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/js_file_upload/vendor/jquery.ui.widget.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/js_file_upload/cors/jquery.xdr-transport.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/js_file_upload/jquery.fileupload.js" charset="utf-8"></script>
+
 <script>
-    $(".input-file input").height($('.input-file').width())
-    $(".upload-file img").height($('.upload-file img').width())
-    $(".js-open-follow").click("on",function(){
-        $("#js-share-guide").show();
-    })
-    $("#js-share-guide").click("on",function(){
-        $(this).hide();
-    })
+$(".input-file input").height($('.input-file').width())
+$(".upload-file img").height($('.upload-file img').width())
+
+$("#select_size li").click(function(){
+    $(this).parent().children("li").each(function(){
+        $(this).removeClass("active");
+    });
+    $(this).attr("class","active");
+});
+
+$("#select_style li").click(function(){
+    $(this).parent().children("li").each(function(){
+        $(this).removeClass("active");
+    });
+    $(this).attr("class","active");
+});
+
+$("#pay").click(function(){
+    var old_img = $("#input_old_img").attr("url");
+    var new_img = $("#input_new_img").attr("url");
+    var select_size = $("#select_size li.active").attr("val");
+    var select_style = $("#select_style li.active").attr("val");
+    console.log(old_img);
+    console.log(new_img);
+    console.log(select_size);
+    console.log(select_style);
+    var jump_url = "/index.php?app=user_order&act=order_view&size="+select_size+"&style="+select_style+"&o="+old_img+"&n="+new_img;
+    location.href=jump_url;
+    return false;
+});
+
+$("#input_old_img").fileupload({
+    sequentialUploads: true,
+    dataType: 'json',
+    done:function(e,data){
+        console.log(e);
+        console.log(data.result);
+        if(data.result.ret == 0)
+        {
+            console.log(data.result.url);
+            $("#div_old_img img").attr("src",data.result.url);
+            $("#input_old_img").attr("url",data.result.url);
+        };
+        
+    }
+});
+
+$("#input_new_img").fileupload({
+    sequentialUploads: true,
+    dataType: 'json',
+    done:function(e,data){
+        console.log(e);
+        console.log(data.result);
+        if(data.result.ret == 0)
+        {
+            console.log(data.result.url);
+            $("#div_new_img img").attr("src",data.result.url);
+            $("#input_new_img").attr("url",data.result.url);
+        };
+        
+    }
+});
+    
 </script>
 </body>
 
